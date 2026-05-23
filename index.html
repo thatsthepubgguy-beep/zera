@@ -1,0 +1,3242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zerubabel Anteneh — Portfolio</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       CSS VARIABLES — EASY TO EDIT (No code knowledge needed!)
+       Just change the hex codes below to customize colors.
+       ═══════════════════════════════════════════════════════════════ */
+    :root {
+      /* ── DARK THEME (Default) ── */
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-tertiary: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.75);
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --accent: #ff4d00;
+      --accent-light: #ff6a1a;
+      --accent-glow: rgba(255, 77, 0, 0.45);
+      --border-color: rgba(255, 255, 255, 0.07);
+      --glass-bg: rgba(17, 17, 17, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --card-bg: #111111;
+      --hero-gradient: linear-gradient(135deg, #1a0800 0%, #3d0f00 30%, #c23000 65%, #ff5500 100%);
+      --noise-opacity: 0.025;
+    }
+
+    /* ── LIGHT THEME (Midnight Gold from image) ── */
+    [data-theme="light"] {
+      --bg-primary: #f5f3f0;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #ebe8e3;
+      --text-primary: #1a1a1a;
+      --text-secondary: rgba(26, 26, 26, 0.75);
+      --text-muted: rgba(26, 26, 26, 0.55);
+      --accent: #5e4b43;
+      --accent-light: #7a6558;
+      --accent-glow: rgba(94, 75, 67, 0.35);
+      --border-color: rgba(26, 26, 26, 0.08);
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(94, 75, 67, 0.15);
+      --glass-shadow: 0 8px 32px rgba(94, 75, 67, 0.15);
+      --card-bg: #ffffff;
+      --hero-gradient: linear-gradient(135deg, #ebe8e3 0%, #d4cdc4 30%, #b8a99a 65%, #9e8d7e 100%);
+      --noise-opacity: 0.015;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Ethiopic', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    /* ── GLASS MORPHISM ── */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .glass-strong {
+      background: var(--glass-bg);
+      backdrop-filter: blur(40px) saturate(200%);
+      -webkit-backdrop-filter: blur(40px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all .4s ease;
+    }
+
+    nav.scrolled {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      position: relative;
+      transition: color .3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform .3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: .6rem 1.6rem;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: .5px;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: transform .3s, box-shadow .3s;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+
+    .nav-cta .dot {
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: .6
+      }
+    }
+
+    /* ── TOGGLES ── */
+    .toggles-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+      transition: transform .5s cubic-bezier(.68, -0.55, .27, 1.55);
+    }
+
+    [data-theme="light"] .theme-toggle .moon {
+      display: none;
+    }
+
+    [data-theme="dark"] .theme-toggle .sun {
+      display: none;
+    }
+
+    /* ── LANGUAGE DROPDOWN ── */
+    .lang-dropdown {
+      position: relative;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .5rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      color: var(--text-primary);
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .3s;
+      font-family: 'Inter', 'Noto Sans Ethiopic', sans-serif;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .lang-btn .lang-flag {
+      font-size: 1.1rem;
+    }
+
+    .lang-menu {
+      position: absolute;
+      top: calc(100% + .5rem);
+      right: 0;
+      min-width: 180px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: .5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all .3s ease;
+      z-index: 1001;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .lang-menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .7rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all .2s;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: .85rem;
+    }
+
+    .lang-option:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .lang-option.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .lang-option .lang-name {
+      font-weight: 500;
+    }
+
+    .lang-option .lang-native {
+      font-size: .75rem;
+      opacity: .7;
+      margin-left: auto;
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    @media(max-width:1024px) {
+      .nav-links {
+        gap: 1.5rem;
+      }
+    }
+
+    @media(max-width:768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        width: 80%;
+        max-width: 320px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(30px) saturate(200%);
+        -webkit-backdrop-filter: blur(30px) saturate(200%);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right .4s ease;
+        border-left: 1px solid var(--glass-border);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+        z-index: 1001;
+      }
+
+      .nav-links.open {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 1.1rem;
+      }
+
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .toggles-row {
+        gap: .5rem;
+      }
+    }
+
+    /* ── HERO (ATTRACTIVE) ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--hero-gradient);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 3rem;
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.pexels.com/photos/13884518/pexels-photo-13884518.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800');
+      background-size: cover;
+      background-position: center top;
+      opacity: .25;
+      mix-blend-mode: luminosity;
+    }
+
+    .hero-gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 40%, var(--bg-primary) 100%);
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .4;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-orb-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--accent);
+      top: -10%;
+      right: -5%;
+      animation: orb-float 8s ease-in-out infinite;
+    }
+
+    .hero-orb-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent-light);
+      bottom: 10%;
+      left: -5%;
+      animation: orb-float 10s ease-in-out infinite reverse;
+    }
+
+    .hero-orb-3 {
+      width: 200px;
+      height: 200px;
+      background: var(--accent);
+      top: 40%;
+      left: 30%;
+      opacity: .2;
+      animation: orb-float 12s ease-in-out infinite;
+    }
+
+    @keyframes orb-float {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(30px, -30px) scale(1.1);
+      }
+
+      66% {
+        transform: translate(-20px, 20px) scale(0.9);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1400px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: .5px;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: .9;
+      color: var(--text-primary);
+      text-shadow: 0 0 80px var(--accent-glow);
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-tag {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .6rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      transition: all .3s;
+    }
+
+    .hero-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero-tag .num {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+    }
+
+    .hero-glass-card {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 3/4;
+      border-radius: 24px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow), 0 0 60px var(--accent-glow);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform .6s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .hero-glass-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.03) 50%, transparent 60%);
+      animation: shimmer 6s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+
+      100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
+    }
+
+    .hero-glass-card:hover {
+      transform: rotateY(-5deg) rotateX(5deg) translateZ(30px);
+    }
+
+    .hero-card-img {
+      position: absolute;
+      inset: 1rem;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .hero-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: filter .5s, transform .5s;
+    }
+
+    .hero-glass-card:hover .hero-card-img img {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    .hero-card-content {
+      position: relative;
+      z-index: 2;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .hero-card-content h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+      line-height: 1.3;
+    }
+
+    .hero-card-content p {
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media(max-width:1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+      }
+
+      .hero-left {
+        align-items: center;
+      }
+
+      .hero-eyebrow::before {
+        display: none;
+      }
+
+      .hero-subtitle {
+        max-width: 100%;
+      }
+
+      .hero-tags {
+        justify-content: center;
+      }
+
+      .hero-cta-row {
+        justify-content: center;
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .hero-glass-card {
+        max-width: 320px;
+        aspect-ratio: 1/1;
+      }
+    }
+
+    @media(max-width:768px) {
+      #hero {
+        padding: 6rem 1.5rem 3rem;
+        min-height: auto;
+        padding-bottom: 4rem;
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 12vw, 5rem);
+      }
+
+      .hero-glass-card {
+        max-width: 280px;
+      }
+
+      .hero-orb-1 {
+        width: 200px;
+        height: 200px;
+      }
+
+      .hero-orb-2 {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 1rem 0;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      gap: 4rem;
+      animation: ticker-scroll 28s linear infinite;
+    }
+
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes ticker-scroll {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .ticker-item svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .ticker-item span {
+      color: var(--text-muted);
+      opacity: .5;
+    }
+
+    /* ── ABOUT (WITH PHOTO SPOT) ── */
+    #about {
+      background: var(--bg-primary);
+      padding: 7rem 3rem;
+    }
+
+    .about-label {
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .about-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* PROFILE PHOTO SPOT */
+    .profile-photo-spot {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 3/4;
+      margin: 0 auto;
+    }
+
+    .profile-photo-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid var(--glass-border);
+      background: var(--bg-secondary);
+    }
+
+    .profile-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+    }
+
+    .profile-photo-frame:hover img {
+      transform: scale(1.05);
+    }
+
+    .profile-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--text-muted);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .profile-photo-placeholder svg {
+      width: 64px;
+      height: 64px;
+      opacity: .3;
+    }
+
+    .profile-photo-placeholder p {
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    .profile-photo-placeholder .placeholder-hint {
+      font-size: .75rem;
+      opacity: .5;
+      font-style: italic;
+    }
+
+    .profile-deco {
+      position: absolute;
+      border-radius: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      padding: 1rem 1.5rem;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      box-shadow: var(--glass-shadow);
+      z-index: 2;
+    }
+
+    .profile-deco-1 {
+      top: -1rem;
+      right: -1rem;
+      animation: float-deco 4s ease-in-out infinite;
+    }
+
+    .profile-deco-2 {
+      bottom: 2rem;
+      left: -1.5rem;
+      animation: float-deco 5s ease-in-out infinite reverse;
+    }
+
+    .profile-deco-3 {
+      bottom: -1rem;
+      right: 2rem;
+      animation: float-deco 6s ease-in-out infinite;
+    }
+
+    @keyframes float-deco {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @media(max-width:768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .profile-photo-spot {
+        max-width: 300px;
+      }
+
+      .profile-deco {
+        display: none;
+      }
+    }
+
+    .about-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .about-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: .8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: .9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px var(--accent-glow);
+    }
+
+    .btn-ghost {
+      color: var(--text-secondary);
+      font-size: .85rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: .5px;
+      transition: color .3s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--accent);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .4s, box-shadow .4s;
+    }
+
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .stat-box:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 50px var(--accent-glow);
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: .78rem;
+      color: var(--text-muted);
+      margin-top: .4rem;
+      letter-spacing: .5px;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--bg-tertiary);
+      padding: 7rem 3rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1;
+      color: var(--text-primary);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .5s cubic-bezier(.23, 1, .32, 1), box-shadow .5s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-glow), transparent);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-12px) rotateX(3deg) scale(1.02);
+      box-shadow: 0 30px 70px var(--accent-glow);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--accent-glow), transparent);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.6rem;
+      transition: transform .4s;
+    }
+
+    .service-card:hover .service-icon {
+      transform: rotateY(180deg);
+    }
+
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: .5rem;
+    }
+
+    .service-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: .8rem;
+      color: var(--text-primary);
+    }
+
+    .service-desc {
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .service-arrow {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(.7);
+      transition: .3s;
+    }
+
+    .service-card:hover .service-arrow {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ── WORK ── */
+    #work {
+      background: var(--bg-primary);
+      padding: 7rem 3rem;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 280px;
+      gap: 1.2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform .5s cubic-bezier(.23, 1, .32, 1), box-shadow .5s;
+    }
+
+    .work-item:nth-child(1) {
+      grid-column: span 7;
+    }
+
+    .work-item:nth-child(2) {
+      grid-column: span 5;
+    }
+
+    .work-item:nth-child(3) {
+      grid-column: span 4;
+    }
+
+    .work-item:nth-child(4) {
+      grid-column: span 4;
+    }
+
+    .work-item:nth-child(5) {
+      grid-column: span 4;
+    }
+
+    .work-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.23, 1, .32, 1), filter .5s;
+      filter: grayscale(30%);
+    }
+
+    .work-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, .6);
+    }
+
+    .work-item:hover img {
+      transform: scale(1.12);
+      filter: grayscale(0%);
+    }
+
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .85) 0%, transparent 60%);
+      transition: opacity .4s;
+    }
+
+    .work-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      transform: translateY(8px);
+      transition: transform .4s;
+    }
+
+    .work-item:hover .work-info {
+      transform: translateY(0);
+    }
+
+    .work-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: .25rem .75rem;
+      border-radius: 50px;
+      margin-bottom: .5rem;
+    }
+
+    .work-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    @media(max-width:768px) {
+      .work-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 220px;
+      }
+
+      .work-item:nth-child(n) {
+        grid-column: span 1;
+      }
+    }
+
+    /* ── PROCESS ── */
+    #process {
+      background: var(--bg-tertiary);
+      padding: 7rem 3rem;
+    }
+
+    .process-timeline {
+      position: relative;
+      display: grid;
+      gap: 2rem;
+      padding-left: 3rem;
+    }
+
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .process-step {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: transform .4s, box-shadow .4s;
+    }
+
+    .process-step:hover {
+      transform: translateX(12px);
+      box-shadow: 0 16px 50px var(--accent-glow);
+    }
+
+    .process-dot {
+      position: absolute;
+      left: -3.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 0 0 6px var(--accent-glow);
+    }
+
+    .process-step-num {
+      font-size: .75rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: .5rem;
+    }
+
+    .process-step-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+      color: var(--text-primary);
+    }
+
+    .process-step-desc {
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      background: var(--bg-primary);
+      padding: 7rem 3rem;
+      overflow: hidden;
+    }
+
+    .testimonials-track {
+      display: flex;
+      gap: 1.5rem;
+      animation: t-scroll 30s linear infinite;
+      width: max-content;
+    }
+
+    .testimonials-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes t-scroll {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    .testi-card {
+      width: 360px;
+      flex-shrink: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: transform .4s, box-shadow .4s;
+    }
+
+    .testi-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 60px var(--accent-glow);
+    }
+
+    .testi-stars {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .testi-text {
+      font-size: .9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .9rem;
+      color: #fff;
+    }
+
+    .testi-name {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text-primary);
+    }
+
+    .testi-role {
+      font-size: .75rem;
+      color: var(--text-muted);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg-tertiary);
+      padding: 7rem 3rem;
+    }
+
+    .contact-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: .95;
+      color: var(--text-primary);
+    }
+
+    .contact-big span {
+      color: var(--accent);
+    }
+
+    .contact-info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem;
+      text-align: center;
+      transition: transform .4s, box-shadow .4s, border-color .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .contact-info-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 50px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    .contact-info-card:hover::before {
+      opacity: 1;
+    }
+
+    .contact-info-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-info-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .contact-info-value {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      padding: .65rem 1.4rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 600;
+      transition: background .3s, color .3s, border-color .3s, transform .3s;
+    }
+
+    .social-pill:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-color);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+    }
+
+    .footer-logo span {
+      color: var(--accent);
+    }
+
+    .footer-copy {
+      font-size: .78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: background .3s, color .3s, border-color .3s, transform .3s;
+    }
+
+    .social-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      z-index: 9997;
+      transition: width .1s;
+    }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 0;
+      background: var(--bg-tertiary);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    .marquee-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: 4px;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--border-color);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .marquee-item.filled {
+      -webkit-text-stroke: 0;
+      color: var(--accent);
+      opacity: .25;
+    }
+
+    /* ── LOADER ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: opacity .6s ease, visibility .6s;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 4px;
+      color: var(--text-primary);
+    }
+
+    .loader-logo span {
+      color: var(--accent);
+    }
+
+    .loader-bar-wrap {
+      width: 200px;
+      height: 2px;
+      background: var(--border-color);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .loader-bar {
+      height: 100%;
+      background: var(--accent);
+      animation: load-bar 1.5s ease forwards;
+    }
+
+    @keyframes load-bar {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    /* ── SKILLS BAR ── */
+    .skill-bar-wrap {
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-bar-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .5rem;
+    }
+
+    .skill-name {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .skill-pct {
+      font-size: .78rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .skill-bar-track {
+      height: 4px;
+      background: var(--border-color);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 4px;
+      width: 0;
+      transition: width 1.5s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    /* ── NOISE ── */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9990;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* ── GLOW ── */
+    .glow-pulse {
+      animation: glow-p 2s infinite;
+    }
+
+    @keyframes glow-p {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px var(--accent-glow)
+      }
+
+      50% {
+        box-shadow: 0 0 40px var(--accent-glow)
+      }
+    }
+
+    /* ── MOBILE ── */
+    @media(max-width:768px) {
+
+      #about,
+      #services,
+      #work,
+      #process,
+      #testimonials,
+      #contact {
+        padding: 4rem 1.5rem;
+      }
+
+      footer {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+
+      .process-timeline {
+        padding-left: 2rem;
+      }
+
+      .process-dot {
+        left: -2.6rem;
+        width: 22px;
+        height: 22px;
+        font-size: .6rem;
+      }
+
+      .testi-card {
+        width: 300px;
+      }
+
+      .marquee-item {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media(max-width:480px) {
+      .hero-title {
+        font-size: clamp(2.5rem, 14vw, 4rem);
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 10vw, 3rem);
+      }
+
+      .about-headline {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+      }
+
+      .contact-big {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+      }
+    }
+
+    /* ── RTL SUPPORT ── */
+    [dir="rtl"] .nav-links {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .about-grid {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .about-cta-row {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .hero-content {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .hero-tags {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .hero-cta-row {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .hero-eyebrow {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .hero-eyebrow::before {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    [dir="rtl"] .process-timeline {
+      padding-left: 0;
+      padding-right: 3rem;
+    }
+
+    [dir="rtl"] .process-timeline::before {
+      left: auto;
+      right: 14px;
+    }
+
+    [dir="rtl"] .process-dot {
+      left: auto;
+      right: -3.6rem;
+    }
+
+    [dir="rtl"] .process-step:hover {
+      transform: translateX(-12px);
+    }
+
+    [dir="rtl"] .testimonials-track {
+      animation-direction: reverse;
+    }
+
+    [dir="rtl"] .ticker-track {
+      animation-direction: reverse;
+    }
+
+    [dir="rtl"] .marquee-track {
+      animation-direction: reverse;
+    }
+
+    [dir="rtl"] .service-arrow {
+      right: auto;
+      left: 2rem;
+    }
+
+    [dir="rtl"] .work-info {
+      text-align: right;
+    }
+
+    [dir="rtl"] .testi-author {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .skill-bar-header {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .footer-socials {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .lang-menu {
+      right: auto;
+      left: 0;
+    }
+
+    @media(max-width:768px) {
+      [dir="rtl"] .process-timeline {
+        padding-right: 2rem;
+      }
+
+      [dir="rtl"] .process-dot {
+        right: -2.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body data-theme="dark">
+
+  <!-- NOISE OVERLAY -->
+  <div class="noise-overlay"></div>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-logo">Zerubabel<span>.</span>Anteneh</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar"></div>
+    </div>
+    <p style="font-size:.78rem;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase" data-i18n="loading">
+      Loading Portfolio...</p>
+  </div>
+
+  <!-- SCROLL PROGRESS -->
+  <div id="progress-bar"></div>
+
+  <!-- ═══════════════════════════════ NAV ══════════════════════════════════ -->
+  <nav id="navbar" class="glass">
+    <div class="nav-logo">One man<span>.</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#hero" data-i18n="nav_home">Home</a>
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#services" data-i18n="nav_services">Services</a>
+      <a href="#work" data-i18n="nav_work">Work</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <a href="#contact" class="nav-cta glow-pulse" data-i18n="nav_cta">Get in touch <span class="dot"></span></a>
+    </div>
+    <div class="toggles-row">
+      <!-- LANGUAGE -->
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
+          <span class="lang-flag" id="currentFlag">us</span>
+          <span id="currentLang">EN</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            style="transition:transform .3s" id="langArrow">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <div class="lang-option active" data-lang="en" onclick="setLang('en')">
+            <span class="lang-flag">us</span><span class="lang-name">English</span><span
+              class="lang-native">English</span>
+          </div>
+          <div class="lang-option" data-lang="am" onclick="setLang('am')">
+            <span class="lang-flag">🇪🇹</span><span class="lang-name">Amharic</span><span
+              class="lang-native">አማርኛ</span>
+          </div>
+          <div class="lang-option" data-lang="om" onclick="setLang('om')">
+            <span class="lang-flag">🇪🇹</span><span class="lang-name">Afaan Oromo</span><span class="lang-native">Afaan
+              Oromoo</span>
+          </div>
+          <div class="lang-option" data-lang="ti" onclick="setLang('ti')">
+            <span class="lang-flag">🇪🇹</span><span class="lang-name">Tigrinya</span><span
+              class="lang-native">ትግርኛ</span>
+          </div>
+        </div>
+      </div>
+      <!-- THEME -->
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+      <!-- HAMBURGER -->
+      <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ══════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-bg-img"></div>
+    <div class="hero-gradient-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow" data-i18n="hero_eyebrow">Hey, I'm a</div>
+        <h1 class="hero-title glitch" data-text="Creative" data-i18n="hero_title">Creative<br><span>Director</span></h1>
+        <p class="hero-subtitle" data-i18n="hero_subtitle">From reels to red carpets, I build brands that connect,
+          convert, and captivate. Great content should feel effortless.</p>
+        <div class="hero-tags">
+          <div class="hero-tag"><span class="num">#01</span><span data-i18n="tag_social">Social Media</span></div>
+          <div class="hero-tag"><span class="num">#02</span><span data-i18n="tag_video">Video Editor</span></div>
+          <div class="hero-tag"><span class="num">#03</span><span data-i18n="tag_event">Event Organizer</span></div>
+          <div class="hero-tag"><span class="num">#04</span><span data-i18n="tag_camera">Camera Man</span></div>
+        </div>
+        <div class="hero-cta-row">
+          <a href="#contact" class="btn-primary" data-i18n="hero_cta_primary">
+            Let's Collaborate
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#work" class="btn-ghost" data-i18n="hero_cta_secondary">See my work →</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-glass-card" id="heroGlassCard">
+          <div class="hero-card-img">
+            <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
+            <img
+              src="IMG_20260517_122255_175.jpg"
+              alt="Zerubabel Anteneh - Creative Director" loading="lazy" />
+          </div>
+          <div class="hero-card-content">
+            <h3 data-i18n="hero_card_title">Zerubabel Anteneh</h3>
+            <p data-i18n="hero_card_desc">Creative Director & Visual Storyteller</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ TICKER ══════════════════════════════════ -->
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker">
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="10" />
+        </svg>
+        <span data-i18n="ticker_social">Social Media Management</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+        <span data-i18n="ticker_video">Video Editing</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2z" />
+        </svg>
+        <span data-i18n="ticker_event">Event Organization</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="3.2" />
+          <path
+            d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+        </svg>
+        <span data-i18n="ticker_photo">Photography & Camera</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+        </svg>
+        <span data-i18n="ticker_content">Content Creation</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M20 6h-2.18c.07-.44.18-.88.18-1.36C18 2.53 15.47 0 12.36 0S6.72 2.53 6.72 4.64c0 .48.11.92.18 1.36H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
+        </svg>
+        <span data-i18n="ticker_brand">Brand Strategy</span> <span>✦</span>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="10" />
+        </svg>
+        <span data-i18n="ticker_social">Social Media Management</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+        <span data-i18n="ticker_video">Video Editing</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2z" />
+        </svg>
+        <span data-i18n="ticker_event">Event Organization</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="3.2" />
+          <path
+            d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+        </svg>
+        <span data-i18n="ticker_photo">Photography & Camera</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+        </svg>
+        <span data-i18n="ticker_content">Content Creation</span> <span>✦</span>
+      </div>
+      <div class="ticker-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M20 6h-2.18c.07-.44.18-.88.18-1.36C18 2.53 15.47 0 12.36 0S6.72 2.53 6.72 4.64c0 .48.11.92.18 1.36H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
+        </svg>
+        <span data-i18n="ticker_brand">Brand Strategy</span> <span>✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ MARQUEE ══════════════════════════════════ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">SOCIAL MEDIA</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">VIDEO EDITING</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">EVENTS</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">CAMERA</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">FREELANCE</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">SOCIAL MEDIA</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">VIDEO EDITING</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">EVENTS</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">CAMERA</span>
+      <span class="marquee-item filled">✦</span>
+      <span class="marquee-item">FREELANCE</span>
+      <span class="marquee-item filled">✦</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ABOUT ══════════════════════════════════ -->
+  <section id="about">
+    <div class="about-label reveal" data-i18n="about_label">Behind the Work</div>
+    <div class="about-grid">
+      <!-- LEFT: Profile Photo Spot -->
+      <div class="reveal-left">
+        <div class="profile-photo-spot">
+          <div class="profile-photo-frame">
+            <!-- 
+              ============================================
+              REPLACE THE IMAGE BELOW WITH YOUR OWN PHOTO!
+              Just change the src="..." URL to your image.
+              Recommended size: 600x800px (3:4 ratio)
+              ============================================
+            -->
+            <img
+              src="IMG_20260517_122255_175.jpg"
+              alt="Your Profile Photo" loading="lazy" />
+          </div>
+          <!-- Floating decorative badges -->
+          <div class="profile-deco profile-deco-1">5+ Years</div>
+          <div class="profile-deco profile-deco-2">150+ Projects</div>
+          <div class="profile-deco profile-deco-3">🎬 Director</div>
+        </div>
+      </div>
+      <!-- RIGHT: Text Content -->
+      <div>
+        <h2 class="about-headline reveal" data-i18n="about_headline">Shaping Experiences<br>That Make Life<br>Memorable
+        </h2>
+        <div class="about-cta-row reveal">
+          <a href="#contact" class="btn-primary" data-i18n="btn_collaborate">
+            Let's Collaborate
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#work" class="btn-ghost" data-i18n="btn_see_work">See my work →</a>
+        </div>
+        <div class="stats-row reveal">
+          <div class="stat-box tilt-3d">
+            <div class="stat-num" data-count="150">0</div>
+            <div class="stat-label" data-i18n="stat_projects">Projects Done</div>
+          </div>
+          <div class="stat-box tilt-3d">
+            <div class="stat-num" data-count="80">0</div>
+            <div class="stat-label" data-i18n="stat_clients">Happy Clients</div>
+          </div>
+          <div class="stat-box tilt-3d">
+            <div class="stat-num" data-count="5">0</div>
+            <div class="stat-label" data-i18n="stat_years">Years Exp.</div>
+          </div>
+        </div>
+        <div class="reveal-right" style="margin-top:2rem">
+          <p class="about-desc" data-i18n="about_desc1">I'm a multi-disciplinary creative professional focused on
+            building powerful digital presences, cinematic visuals, and unforgettable live experiences that solve
+            real-world problems.</p>
+          <p class="about-desc" style="margin-top:1rem" data-i18n="about_desc2">Whether it's growing a brand on social
+            media, capturing a story through the lens, or orchestrating an event that runs flawlessly — I bring
+            precision and passion to every project.</p>
+          <div style="margin-top:2.5rem">
+            <div class="skill-bar-wrap">
+              <div class="skill-bar-header"><span class="skill-name" data-i18n="skill_social">Social Media
+                  Strategy</span><span class="skill-pct">95%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="95"></div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar-header"><span class="skill-name" data-i18n="skill_video">Video Editing (Premiere /
+                  DaVinci)</span><span class="skill-pct">92%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="92"></div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar-header"><span class="skill-name" data-i18n="skill_event">Event
+                  Production</span><span class="skill-pct">88%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="88"></div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar-header"><span class="skill-name" data-i18n="skill_photo">Photography &
+                  Cinematography</span><span class="skill-pct">90%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="90"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SERVICES ══════════════════════════════════ -->
+  <section id="services">
+    <div class="section-header">
+      <div class="section-label reveal" data-i18n="services_label">What I Offer</div>
+      <h2 class="section-title reveal" data-i18n="services_title">Services Built<br>For <span
+          style="color:var(--accent)">Impact</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal float-card-3d">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" />
+            <circle cx="12" cy="17" r="1" fill="var(--accent)" />
+            <line x1="9" y1="6" x2="15" y2="6" />
+          </svg>
+        </div>
+        <div class="service-num">#01</div>
+        <h3 class="service-title" data-i18n="service_1_title">Social Media Management</h3>
+        <p class="service-desc" data-i18n="service_1_desc">Full-cycle management across Instagram, TikTok, YouTube &
+          LinkedIn. Strategy, content calendar, copywriting, scheduling, analytics & growth hacking.</p>
+        <div class="service-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff"
+            stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </div>
+      <div class="service-card reveal float-card-3d" style="transition-delay:.1s">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <polygon points="10,9 16,12 10,15" fill="var(--accent)" stroke="none" />
+          </svg>
+        </div>
+        <div class="service-num">#02</div>
+        <h3 class="service-title" data-i18n="service_2_title">Video Editing</h3>
+        <p class="service-desc" data-i18n="service_2_desc">Cinematic cuts, color grading, motion graphics, sound design,
+          reels, YouTube videos, commercials and event highlight films delivered frame-perfect.</p>
+        <div class="service-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff"
+            stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </div>
+      <div class="service-card reveal float-card-3d" style="transition-delay:.2s">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            <polyline points="9,22 9,12 15,12 15,22" />
+          </svg>
+        </div>
+        <div class="service-num">#03</div>
+        <h3 class="service-title" data-i18n="service_3_title">Event Organization</h3>
+        <p class="service-desc" data-i18n="service_3_desc">End-to-end event production from concept to execution.
+          Corporate launches, brand activations, concerts, weddings, and private experiences.</p>
+        <div class="service-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff"
+            stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </div>
+      <div class="service-card reveal float-card-3d" style="transition-delay:.3s">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
+            <circle cx="12" cy="13" r="4" />
+          </svg>
+        </div>
+        <div class="service-num">#04</div>
+        <h3 class="service-title" data-i18n="service_4_title">Photography & Camera Work</h3>
+        <p class="service-desc" data-i18n="service_4_desc">Professional DSLR & cinema camera operation. Portrait,
+          commercial, event, and documentary photography with studio-quality lighting setups.</p>
+        <div class="service-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff"
+            stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </div>
+      <div class="service-card reveal float-card-3d" style="transition-delay:.4s">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+            <line x1="12" y1="12" x2="12" y2="16" />
+            <line x1="10" y1="14" x2="14" y2="14" />
+          </svg>
+        </div>
+        <div class="service-num">#05</div>
+        <h3 class="service-title" data-i18n="service_5_title">Freelance Consulting</h3>
+        <p class="service-desc" data-i18n="service_5_desc">Flexible, on-demand creative expertise for startups,
+          agencies, and brands. Remote or on-site. Short sprints or long-term partnerships.</p>
+        <div class="service-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff"
+            stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </div>
+      <!-- CTA Card -->
+      <div class="service-card reveal"
+        style="background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%);border-color:transparent;transition-delay:.5s;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <div
+            style="margin-bottom:1rem;width:52px;height:52px;background:rgba(255,255,255,.18);border-radius:14px;display:flex;align-items:center;justify-content:center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+              <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+            </svg>
+          </div>
+          <h3 class="service-title" style="font-size:1.5rem" data-i18n="cta_card_title">Ready to build something great?
+          </h3>
+          <p style="font-size:.85rem;color:rgba(255,255,255,.8);margin-top:.75rem;line-height:1.7"
+            data-i18n="cta_card_desc">Let's create meaningful work together. I'm always open to new projects.</p>
+        </div>
+        <a href="#contact" class="btn-primary"
+          style="background:#fff;color:var(--accent);margin-top:1.5rem;align-self:flex-start"
+          data-i18n="cta_card_btn">Start a project →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ WORK ══════════════════════════════════ -->
+  <section id="work">
+    <div class="section-header">
+      <div class="section-label reveal" data-i18n="work_label">Portfolio</div>
+      <h2 class="section-title reveal" data-i18n="work_title">Selected <span style="color:var(--accent)">Work</span>
+      </h2>
+    </div>
+    <div class="work-grid reveal">
+      <div class="work-item">
+        <img
+          src="https://images.pexels.com/photos/30215324/pexels-photo-30215324.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          alt="Concert Event" loading="lazy" />
+        <div class="work-overlay"></div>
+        <div class="work-info"><span class="work-tag">Event</span>
+          <div class="work-title">Neon Nights — Music Festival</div>
+        </div>
+      </div>
+      <div class="work-item">
+        <img
+          src="https://images.pexels.com/photos/13884518/pexels-photo-13884518.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800"
+          alt="Studio Portrait" loading="lazy" />
+        <div class="work-overlay"></div>
+        <div class="work-info"><span class="work-tag">Photography</span>
+          <div class="work-title">Editorial Portrait Series</div>
+        </div>
+      </div>
+      <div class="work-item">
+        <img
+          src="https://images.pexels.com/photos/29505140/pexels-photo-29505140.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          alt="Video Edit" loading="lazy" />
+        <div class="work-overlay"></div>
+        <div class="work-info"><span class="work-tag">Video</span>
+          <div class="work-title">Brand Commercial Cut</div>
+        </div>
+      </div>
+      <div class="work-item">
+        <img
+          src="https://images.pexels.com/photos/22604116/pexels-photo-22604116.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          alt="Crowd Event" loading="lazy" />
+        <div class="work-overlay"></div>
+        <div class="work-info"><span class="work-tag">Event</span>
+          <div class="work-title">Outdoor Crowd Activation</div>
+        </div>
+      </div>
+      <div class="work-item">
+        <img
+          src="https://images.pexels.com/photos/33899322/pexels-photo-33899322.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          alt="Video Production" loading="lazy" />
+        <div class="work-overlay"></div>
+        <div class="work-info"><span class="work-tag">Production</span>
+          <div class="work-title">Studio Production Setup</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ PROCESS ══════════════════════════════════ -->
+  <section id="process">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1400px;margin:0 auto"
+      class="process-cols">
+      <div>
+        <div class="about-label reveal" data-i18n="process_label">How I Work</div>
+        <h2 class="about-headline reveal" data-i18n="process_title">My Creative<br>Process</h2>
+        <p class="about-desc reveal" style="margin-top:1rem" data-i18n="process_desc">Every great project starts with
+          listening. I follow a proven framework that delivers results on time, every time.</p>
+      </div>
+      <div class="process-timeline reveal">
+        <div class="process-step">
+          <div class="process-dot">01</div>
+          <div class="process-step-num">STEP 01</div>
+          <div class="process-step-title" data-i18n="step_1_title">Discovery & Strategy</div>
+          <p class="process-step-desc" data-i18n="step_1_desc">Deep-dive into your brand, goals, audience, and
+            competitors. We define the vision together before a single frame is shot.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-dot">02</div>
+          <div class="process-step-num">STEP 02</div>
+          <div class="process-step-title" data-i18n="step_2_title">Creative Concepting</div>
+          <p class="process-step-desc" data-i18n="step_2_desc">Moodboards, storyboards, content calendars. Every detail
+            is planned to align with your brand identity and campaign goals.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-dot">03</div>
+          <div class="process-step-num">STEP 03</div>
+          <div class="process-step-title" data-i18n="step_3_title">Production & Execution</div>
+          <p class="process-step-desc" data-i18n="step_3_desc">Lights, camera, action. Whether on-set or at a live
+            event, I bring full-scale creative execution with professional-grade equipment.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-dot">04</div>
+          <div class="process-step-num">STEP 04</div>
+          <div class="process-step-title" data-i18n="step_4_title">Delivery & Growth</div>
+          <p class="process-step-desc" data-i18n="step_4_desc">Final assets delivered, published, and tracked. Ongoing
+            performance analysis to optimize results and maximize ROI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ TESTIMONIALS ══════════════════════════════════ -->
+  <section id="testimonials">
+    <div class="section-header">
+      <div class="section-label reveal" data-i18n="testimonials_label">Client Love</div>
+      <h2 class="section-title reveal" data-i18n="testimonials_title">What They <span
+          style="color:var(--accent)">Say</span></h2>
+    </div>
+    <div style="overflow:hidden;margin-top:3rem">
+      <div class="testimonials-track">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Alex transformed our brand's Instagram from 2K to 45K followers in just 4 months. The
+            content quality is unmatched and our engagement skyrocketed."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SC</div>
+            <div>
+              <div class="testi-name">Sarah Chen</div>
+              <div class="testi-role">Founder, StyleHouse Co.</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The event was flawless. Alex organized our product launch with 500 guests and it ran
+            smoother than any event we've ever done. Truly world-class."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">MR</div>
+            <div>
+              <div class="testi-name">Marcus Reid</div>
+              <div class="testi-role">CEO, Apex Brands</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Our highlight reel brought tears to my eyes. The cinematography and editing are on
+            another level. Worth every penny and more."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">JL</div>
+            <div>
+              <div class="testi-name">Jessica Lee</div>
+              <div class="testi-role">Wedding Client</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"As a startup, we needed someone who could wear many hats. Alex handled social, video,
+            and our launch event all at once — perfectly."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">DK</div>
+            <div>
+              <div class="testi-name">David Kim</div>
+              <div class="testi-role">Co-founder, Novex AI</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The commercial Alex shot for us went viral on TikTok. 2.3M views in the first week. Our
+            sales doubled that month. Absolutely incredible work."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AM</div>
+            <div>
+              <div class="testi-name">Aisha Mohammed</div>
+              <div class="testi-role">Brand Director, Lumé</div>
+            </div>
+          </div>
+        </div>
+        <!-- Duplicate for loop -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Alex transformed our brand's Instagram from 2K to 45K followers in just 4 months. The
+            content quality is unmatched and our engagement skyrocketed."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SC</div>
+            <div>
+              <div class="testi-name">Sarah Chen</div>
+              <div class="testi-role">Founder, StyleHouse Co.</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The event was flawless. Alex organized our product launch with 500 guests and it ran
+            smoother than any event we've ever done. Truly world-class."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">MR</div>
+            <div>
+              <div class="testi-name">Marcus Reid</div>
+              <div class="testi-role">CEO, Apex Brands</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Our highlight reel brought tears to my eyes. The cinematography and editing are on
+            another level. Worth every penny and more."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">JL</div>
+            <div>
+              <div class="testi-name">Jessica Lee</div>
+              <div class="testi-role">Wedding Client</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"As a startup, we needed someone who could wear many hats. Alex handled social, video,
+            and our launch event all at once — perfectly."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">DK</div>
+            <div>
+              <div class="testi-name">David Kim</div>
+              <div class="testi-role">Co-founder, Novex AI</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The commercial Alex shot for us went viral on TikTok. 2.3M views in the first week. Our
+            sales doubled that month. Absolutely incredible work."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AM</div>
+            <div>
+              <div class="testi-name">Aisha Mohammed</div>
+              <div class="testi-role">Brand Director, Lumé</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CONTACT ══════════════════════════════════ -->
+  <section id="contact">
+    <div style="max-width:900px;margin:0 auto;text-align:center;">
+      <div class="about-label reveal" data-i18n="contact_label">Get In Touch</div>
+      <h2 class="contact-big reveal" data-i18n="contact_title">Let's Build<br>Something <span>Iconic.</span></h2>
+      <p class="reveal"
+        style="margin-top:1.5rem;color:var(--text-muted);font-size:1rem;line-height:1.8;max-width:520px;margin-left:auto;margin-right:auto;"
+        data-i18n="contact_desc">Have a project in mind? I'm available for freelance work, collaborations, and long-term
+        partnerships. Let's make something unforgettable.</p>
+
+      <!-- Contact Cards -->
+      <div class="reveal"
+        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:3rem;">
+        <a href="mailto:hello@alexvoss.co" class="contact-info-card">
+          <div class="contact-info-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
+          <div class="contact-info-label" data-i18n="contact_email_label">Email</div>
+          <div class="contact-info-value">hello@alexvoss.co</div>
+        </a>
+        <a href="tel:+15550001234" class="contact-info-card">
+          <div class="contact-info-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+            </svg>
+          </div>
+          <div class="contact-info-label" data-i18n="contact_phone_label">Phone</div>
+          <div class="contact-info-value">+251 931-512-124</div>
+        </a>
+        <div class="contact-info-card" style="cursor:default;">
+          <div class="contact-info-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <div class="contact-info-label" data-i18n="contact_location_label">Location</div>
+          <div class="contact-info-value" data-i18n="contact_location_value">Adama · Remote Worldwide</div>
+        </div>
+        <div class="contact-info-card" style="cursor:default;">
+          <div class="contact-info-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12,6 12,12 16,14" />
+            </svg>
+          </div>
+          <div class="contact-info-label" data-i18n="contact_availability_label">Availability</div>
+          <div class="contact-info-value" data-i18n="contact_availability_value">Open for Projects</div>
+        </div>
+      </div>
+
+      <!-- Social Row -->
+      <div class="reveal" style="display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap;">
+        <a href="#" class="social-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="5" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+          </svg>
+          Instagram
+        </a>
+        <a href="#" class="social-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.24 8.24 0 004.83 1.55V6.79a4.86 4.86 0 01-1.06-.1z" />
+          </svg>
+          TikTok
+        </a>
+        <a href="#" class="social-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M21.58 7.19a2.52 2.52 0 00-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.52 2.52 0 002.42 7.19 26.3 26.3 0 002 12a26.3 26.3 0 00.42 4.81 2.52 2.52 0 001.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.52 2.52 0 001.77-1.77A26.3 26.3 0 0022 12a26.3 26.3 0 00-.42-4.81zM10 15V9l5.2 3-5.2 3z" />
+          </svg>
+          YouTube
+        </a>
+        <a href="#" class="social-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="reveal" style="margin-top:2.5rem;">
+        <a href="mailto:hello@alexvoss.co" class="btn-primary"
+          style="font-size:1rem;padding:1rem 2.5rem;display:inline-flex;" data-i18n="contact_cta">
+          Start a Conversation
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ══════════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">Zerubabel<span>.</span>Anteneh</div>
+    <div class="footer-copy">© 2026 Zerubabel Anteneh. All rights reserved. Crafted with
+      <svg style="display:inline;vertical-align:middle;margin-left:3px" width="14" height="14" viewBox="0 0 24 24"
+        fill="var(--accent)" stroke="none">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+      </svg>
+    </div>
+    <div class="footer-socials">
+      <a href="#" class="social-btn" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <circle cx="12" cy="12" r="5" />
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+        </svg>
+      </a>
+      <a href="#" class="social-btn" title="TikTok">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.24 8.24 0 004.83 1.55V6.79a4.86 4.86 0 01-1.06-.1z" />
+        </svg>
+      </a>
+      <a href="#" class="social-btn" title="YouTube">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M21.58 7.19a2.52 2.52 0 00-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.52 2.52 0 002.42 7.19 26.3 26.3 0 002 12a26.3 26.3 0 00.42 4.81 2.52 2.52 0 001.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.52 2.52 0 001.77-1.77A26.3 26.3 0 0022 12a26.3 26.3 0 00-.42-4.81zM10 15V9l5.2 3-5.2 3z" />
+        </svg>
+      </a>
+      <a href="#" class="social-btn" title="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+          <circle cx="4" cy="4" r="2" />
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════ JAVASCRIPT ══════════════════════════════════ -->
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       TRANSLATIONS — EASY TO EDIT
+       Change the text below to customize content in each language.
+       ═══════════════════════════════════════════════════════════════ */
+    const translations = {
+      en: {
+        loading: "Loading Portfolio...",
+        nav_home: "Home", nav_about: "About", nav_services: "Services",
+        nav_work: "Work", nav_contact: "Contact", nav_cta: "Get in touch",
+        hero_eyebrow: "Hey, I'm a", hero_title: "Creative<br><span>Director</span>",
+        hero_subtitle: "From reels to red carpets, I build brands that connect, convert, and captivate. Great content should feel effortless.",
+        tag_social: "Social Media", tag_video: "Video Editor", tag_event: "Event Organizer", tag_camera: "Camera Man",
+        hero_cta_primary: "Let's Collaborate", hero_cta_secondary: "See my work →",
+        hero_card_title: "Alex Voss", hero_card_desc: "Creative Director & Visual Storyteller",
+        ticker_social: "Social Media Management", ticker_video: "Video Editing",
+        ticker_event: "Event Organization", ticker_photo: "Photography & Camera",
+        ticker_content: "Content Creation", ticker_brand: "Brand Strategy",
+        about_label: "Behind the Work", about_headline: "Shaping Experiences<br>That Make Life<br>Memorable",
+        btn_collaborate: "Let's Collaborate", btn_see_work: "See my work →",
+        stat_projects: "Projects Done", stat_clients: "Happy Clients", stat_years: "Years Exp.",
+        about_desc1: "I'm a multi-disciplinary creative professional focused on building powerful digital presences, cinematic visuals, and unforgettable live experiences that solve real-world problems.",
+        about_desc2: "Whether it's growing a brand on social media, capturing a story through the lens, or orchestrating an event that runs flawlessly — I bring precision and passion to every project.",
+        skill_social: "Social Media Strategy", skill_video: "Video Editing (Premiere / DaVinci)",
+        skill_event: "Event Production", skill_photo: "Photography & Cinematography",
+        services_label: "What I Offer", services_title: "Services Built<br>For <span style='color:var(--accent)'>Impact</span>",
+        service_1_title: "Social Media Management", service_1_desc: "Full-cycle management across Instagram, TikTok, YouTube & LinkedIn. Strategy, content calendar, copywriting, scheduling, analytics & growth hacking.",
+        service_2_title: "Video Editing", service_2_desc: "Cinematic cuts, color grading, motion graphics, sound design, reels, YouTube videos, commercials and event highlight films delivered frame-perfect.",
+        service_3_title: "Event Organization", service_3_desc: "End-to-end event production from concept to execution. Corporate launches, brand activations, concerts, weddings, and private experiences.",
+        service_4_title: "Photography & Camera Work", service_4_desc: "Professional DSLR & cinema camera operation. Portrait, commercial, event, and documentary photography with studio-quality lighting setups.",
+        service_5_title: "Freelance Consulting", service_5_desc: "Flexible, on-demand creative expertise for startups, agencies, and brands. Remote or on-site. Short sprints or long-term partnerships.",
+        cta_card_title: "Ready to build something great?", cta_card_desc: "Let's create meaningful work together. I'm always open to new projects.", cta_card_btn: "Start a project →",
+        work_label: "Portfolio", work_title: "Selected <span style='color:var(--accent)'>Work</span>",
+        process_label: "How I Work", process_title: "My Creative<br>Process",
+        process_desc: "Every great project starts with listening. I follow a proven framework that delivers results on time, every time.",
+        step_1_title: "Discovery & Strategy", step_1_desc: "Deep-dive into your brand, goals, audience, and competitors. We define the vision together before a single frame is shot.",
+        step_2_title: "Creative Concepting", step_2_desc: "Moodboards, storyboards, content calendars. Every detail is planned to align with your brand identity and campaign goals.",
+        step_3_title: "Production & Execution", step_3_desc: "Lights, camera, action. Whether on-set or at a live event, I bring full-scale creative execution with professional-grade equipment.",
+        step_4_title: "Delivery & Growth", step_4_desc: "Final assets delivered, published, and tracked. Ongoing performance analysis to optimize results and maximize ROI.",
+        testimonials_label: "Client Love", testimonials_title: "What They <span style='color:var(--accent)'>Say</span>",
+        contact_label: "Get In Touch", contact_title: "Let's Build<br>Something <span>Iconic.</span>",
+        contact_desc: "Have a project in mind? I'm available for freelance work, collaborations, and long-term partnerships. Let's make something unforgettable.",
+        contact_email_label: "Email", contact_phone_label: "Phone",
+        contact_location_label: "Location", contact_location_value: "New York · Remote Worldwide",
+        contact_availability_label: "Availability", contact_availability_value: "Open for Projects",
+        contact_cta: "Start a Conversation"
+      },
+      am: {
+        loading: "ፖርትፎሊዮ እየተጫነ ነው...",
+        nav_home: "መነሻ", nav_about: "ስለ እኔ", nav_services: "አገልግሎቶች",
+        nav_work: "ሥራዎች", nav_contact: "አግኙኝ", nav_cta: "አግኙኝ",
+        hero_eyebrow: "ሰላም፣ እኔ", hero_title: "የፈጠራ<br><span>ዳይሬክተር</span> ነኝ",
+        hero_subtitle: "ከማህበራዊ ሚዲያ እስከ ትልቅ ዝግጅቶች፣ የሚያገናኙ፣ የሚቀይሩ እና የሚሳቡ ብራንዶችን እንገንባለን። ጥሩ ይዘት የማይታወቅ መስሎ እንዲሰማ ያደርገዋል።",
+        tag_social: "ማህበራዊ ሚዲያ", tag_video: "የቪዲዮ አርታዒ", tag_event: "የዝግጅት አደራጅ", tag_camera: "ካሜራ ሰራተኛ",
+        hero_cta_primary: "እንተባበር", hero_cta_secondary: "ሥራዬን ይመልከቱ →",
+        hero_card_title: "አሌክስ ቮስ", hero_card_desc: "የፈጠራ ዳይሬክተር እና የዘይቤ ተረካሚ",
+        ticker_social: "የማህበራዊ ሚዲያ አስተዳደር", ticker_video: "የቪዲዮ አርትዖት",
+        ticker_event: "የዝግጅት አደራጅነት", ticker_photo: "ፎቶግራፍ እና ካሜራ",
+        ticker_content: "ይዘት ፍጠር", ticker_brand: "የብራንድ ስትራቴጂ",
+        about_label: "ስለ ሥራው", about_headline: "አስደሳች<br>ልምዶችን<br>የሚፈጥሩ",
+        btn_collaborate: "እንተባበር", btn_see_work: "ሥራዬን ይመልከቱ →",
+        stat_projects: "የተጠናቀቁ ሥራዎች", stat_clients: "ደስተኛ ደንበኞች", stat_years: "የስራ ዓመታት",
+        about_desc1: "ብርቱ የዲጂታል መገናኛ፣ የሲኒማ ዘይቤ እና የማይረሱ የቀጥታ ልምዶችን ለመፍጠር የሚሰራ ብዙ-ዘርፋዊ የፈጠራ ባለሙያ ነኝ።",
+        about_desc2: "በማህበራዊ ሚዲያ ላይ ብራንድን ማደግ፣ በካሜራ ታሪክን መቅረጽ፣ ወይም በትክክል የሚሰራ ዝግጅትን መደረግ — ለእያንዳንዱ ፕሮጀክት ትክክለኛነት እና ፍቅርን አመጣለሁ።",
+        skill_social: "የማህበራዊ ሚዲያ ስትራቴጂ", skill_video: "የቪዲዮ አርትዖት (ፕሪሚየር / ዳቪንቺ)",
+        skill_event: "የዝግጅት ምርት", skill_photo: "ፎቶግራፍ እና ሲኒማቶግራፊ",
+        services_label: "ምን እቀርባለሁ", services_title: "ለተፅዕኖ<br><span style='color:var(--accent)'>የተገነቡ</span> አገልግሎቶች",
+        service_1_title: "የማህበራዊ ሚዲያ አስተዳደር", service_1_desc: "በኢንስታግራም፣ ቲክቶክ፣ ዩቲዩብ እና ሊንክድኢን ላይ ሙሉ-ምዑል አስተዳደር። ስትራቴጂ፣ የይዘት ቀን መቁጠሪያ፣ ጽሑፍ፣ መርሐ ግብር፣ ትንተና እና እድገት።",
+        service_2_title: "የቪዲዮ አርትዖት", service_2_desc: "የሲኒማ ቁራጮች፣ የቀለም ደረጃ፣ የእንቅስቃሴ ግራፊክስ፣ የድምፅ ዲዛይን፣ ሪልስ፣ የዩቲዩብ ቪዲዮዎች፣ የማስታወቂያ እና የዝግጅት ማጅማሪያ ፊልሞች።",
+        service_3_title: "የዝግጅት አደራጅነት", service_3_desc: "ከአሳብ እስከ አፈፃፀም ድረስ የመጨረሻ-ለመጨረሻ የዝግጅት ምርት። የድርጅት መጀመሪያዎች፣ የብራንድ አክቲቬሽኖች፣ ኮንሰርቶች፣ ሰርግ እና የግል ልምዶች።",
+        service_4_title: "ፎቶግራፍ እና የካሜራ ሥራ", service_4_desc: "ፕሮፌሽናል DSLR እና የሲኒማ ካሜራ ክዋኔ። የፖርትሬት፣ የንግድ፣ የዝግጅት እና ሰነዳዊ ፎቶግራፍ።",
+        service_5_title: "የፍሪላንስ ምክር", service_5_desc: "ለስታርትአፕስ፣ ወኪሎች እና ብራንዶች ተለዋዋጭ፣ በማንኛውም ጊዜ የሚገኝ የፈጠራ ብቃት።",
+        cta_card_title: "አስደናቂ ነገር ለመገንባት ዝግጁ ነዎት?", cta_card_desc: "አንድ ላይ ትርጉም ያለው ሥራ እንፍጠር። ለአዳዲስ ፕሮጀክቶች ሁልጊዜ ክፍት ነኝ።", cta_card_btn: "ፕሮጀክት ይጀምሩ →",
+        work_label: "ፖርትፎሊዮ", work_title: "የተመረጡ <span style='color:var(--accent)'>ሥራዎች</span>",
+        process_label: "እንዴት እሰራለሁ", process_title: "የእኔ የፈጠራ<br>ስርዓተ-ጥቅም",
+        process_desc: "እያንዳንዱ ታላቅ ፕሮጀክት በመስማት ይጀምራል። ያለ ማንኛውም ጊዜ አባክኖ በጊዜ ውጤቶችን የሚሰጥ የረቀቀ ስርዓተ-ጥቅም እከተላለሁ።",
+        step_1_title: "የመረጃ ማሰባሰብ እና ስትራቴጂ", step_1_desc: "የእርስዎን ብራንድ፣ ግቦች፣ ታዳሚዎች እና ውድድሮች ጠልቀን እንመረምራለን። አንድ ፍሬም ሳንቀርብ ራዕዩን አብረን እንደናደርጋለን።",
+        step_2_title: "የፈጠራ ሃሳብ መገንባት", step_2_desc: "ሙድቦርዶች፣ የታሪክ ሰሌዳዎች፣ የይዘት ቀን መቁጠሪያዎች። ከእርስዎ የብራንድ ማንነት እና የዘመቻ ግቦች ጋር እንዲስማማ እያንዳንዱ ዝርዝር የታቀደ ነው።",
+        step_3_title: "ምርት እና አፈፃፀም", step_3_desc: "ብርሃን፣ ካሜራ፣ እርምጃ። በሴት ላይ ወይም በቀጥታ ዝግጅት ላይ ቢሆን፣ በፕሮፌሽናል ደረጃ መሳሪያዎች ሙሉ-ሸክላ የፈጠራ አፈፃፀም አመጣለሁ።",
+        step_4_title: "ማድረስ እና እድገት", step_4_desc: "የመጨረሻ መረጃዎች ተላልፈዋል፣ ታትመዋል እና ተከታትለዋል። ውጤቶችን ለማሻሻል እና ROI ለማብዛት በማያቋርጥ የአፈፃፀም ትንተና።",
+        testimonials_label: "የደንበኞች ፍቅር", testimonials_title: "ምን <span style='color:var(--accent)'>ይላሉ</span>",
+        contact_label: "አግኙኝ", contact_title: "አስደናቂ<br>ነገር <span>እንገንባ።</span>",
+        contact_desc: "ፕሮጀክት አለዎት? ለፍሪላንስ ሥራ፣ ለቅንብሮች እና ለረጅም ጊዜ አጋርነቶች ዝግጁ ነኝ። የማይረሽ ነገር እንፍጠር።",
+        contact_email_label: "ኢሜይል", contact_phone_label: "ስልክ",
+        contact_location_label: "አካባቢ", contact_location_value: "ኒው ዮርክ · በመላው ዓለም",
+        contact_availability_label: "ተገኝነት", contact_availability_value: "ለፕሮጀክቶች ክፍት",
+        contact_cta: "ውይይት ይጀምሩ"
+      },
+      om: {
+        loading: "Portfolio itti gallee...",
+        nav_home: "Seensa", nav_about: "Waa'ee Koo", nav_services: "Tajaajiloota",
+        nav_work: "Hojiiwwan", nav_contact: "Qunnamaa", nav_cta: "Qunnamaa",
+        hero_eyebrow: "Akkam, Ani", hero_title: "Creative<br><span>Director</span> dha",
+        hero_subtitle: "Social media irraa hanga red carpets, brandoota walitti dhufanii, jijjiiranii, ajaa'ibsiisan ijaarra. Qabiyyee gaariin akka hin mul'anne hojjechuu qaba.",
+        tag_social: "Social Media", tag_video: "Video Editor", tag_event: "Event Organizer", tag_camera: "Camera Man",
+        hero_cta_primary: "Waliin Hojjennu", hero_cta_secondary: "Hojii koo ilaali →",
+        hero_card_title: "Alex Voss", hero_card_desc: "Creative Director & Visual Storyteller",
+        ticker_social: "Social Media Management", ticker_video: "Video Editing",
+        ticker_event: "Event Organization", ticker_photo: "Photography & Camera",
+        ticker_content: "Content Creation", ticker_brand: "Brand Strategy",
+        about_label: "Waa'ee Hojii", about_headline: "Muuxannoo<br>Jireenyaa<br>Bareedaa",
+        btn_collaborate: "Waliin Hojjennu", btn_see_work: "Hojii koo ilaali →",
+        stat_projects: "Hojiiwwan Xumuraman", stat_clients: "Macaafa Qophaa'aa", stat_years: "Waggaawwan",
+        about_desc1: "Professional fayyadamaa digital, cinematic visuals, fi muuxannoo live ajaa'ibsiisaa ijaaruuf kennamuun hojjetaa kenna.",
+        about_desc2: "Brand social media irratti guddisuu, seenaa camera'n qabachuu, ykn event sirritti hojjechuu — precision fi passion hunduma kennan.",
+        skill_social: "Social Media Strategy", skill_video: "Video Editing (Premiere / DaVinci)",
+        skill_event: "Event Production", skill_photo: "Photography & Cinematography",
+        services_label: "Ma Kennan", services_title: "Tajaajiloota<br><span style='color:var(--accent)'>Dhiibbaa</span> Vufaan",
+        service_1_title: "Social Media Management", service_1_desc: "Instagram, TikTok, YouTube & LinkedIn irratti tajaajila guutuu. Strategy, calendar, copywriting, scheduling, analytics fi growth.",
+        service_2_title: "Video Editing", service_2_desc: "Cinematic cuts, color grading, motion graphics, sound design, reels, YouTube videos, commercials fi event highlights.",
+        service_3_title: "Event Organization", service_3_desc: "Event production guutuu concept irraa execution dha. Corporate launches, brand activations, concerts, weddings, fi experiences dhuunfaa.",
+        service_4_title: "Photography & Camera Work", service_4_desc: "Professional DSLR fi cinema camera. Portrait, commercial, event, fi documentary photography studio-quality lighting waliin.",
+        service_5_title: "Freelance Consulting", service_5_desc: "Expertise creative flexible startups, agencies, fi brands fayyadamuuf. Remote ykn on-site. Short sprints ykn partnerships dheeraa.",
+        cta_card_title: "Wanti gaarii ijaaruuf qophii dhuftee?", cta_card_desc: "Waliin hojii barbaachisaa ijaarra. Hojiiwwan haaraaf yoomuu banaa dha.", cta_card_btn: "Projekti Jalqabi →",
+        work_label: "Portfolio", work_title: "Hojiiwwan <span style='color:var(--accent)'>Filaman</span>",
+        process_label: "Akkamitti Hojjechaa", process_title: "Creative<br>Process Koo",
+        process_desc: "Projektiwwan hunduu dhaggeeffachuun jalqabu. Framework mirkanaa'ee fayyadamuun yeroo hunduu bu'aa kenna.",
+        step_1_title: "Discovery & Strategy", step_1_desc: "Brand, goals, audience, fi competitors keessan gadi fageenyaan ilaalla. Mulkkula waliin murteessina frame tokkollee hin kaffalnee dura.",
+        step_2_title: "Creative Concepting", step_2_desc: "Moodboards, storyboards, content calendars. Ibsa hunduu brand identity fi campaign goals keessan waliin walqixa akka ta'uuf qophaa'eera.",
+        step_3_title: "Production & Execution", step_3_desc: "Lights, camera, action. Set irratti ykn event live irratti, execution creative guutuu equipment professional waliin fidaa.",
+        step_4_title: "Delivery & Growth", step_4_desc: "Assets final dhiyaatan, maxxanfaman, fi socho'aa. Analysis performance itti fufaa bu'aa optimize fi ROI maximize gochuuf.",
+        testimonials_label: "Jaallachuu Maamiltootaa", testimonials_title: "Maamiltoonni <span style='color:var(--accent)'>Maal</span> Jedhu",
+        contact_label: "Qunnamaa", contact_title: "Wanti<br><span>Iconic</span> Ijaarru.",
+        contact_desc: "Projekti qabdaa? Freelance, collaborations, fi partnerships dheeraa fayyadamuuf qophii dha. Wanti hin irraanfatne ijaarra.",
+        contact_email_label: "Email", contact_phone_label: "Bilbila",
+        contact_location_label: "Bakka", contact_location_value: "New York · Addunyaa Guutuu",
+        contact_availability_label: "Qophii", contact_availability_value: "Projektiif Banaa",
+        contact_cta: "Waliin Haasa'u Jalqabi"
+      },
+      ti: {
+        loading: "Portfolio እየተጫነ ኣሎ...",
+        nav_home: "መበገሲ", nav_about: "ብዛዕባይ", nav_services: "ኣገልግሎታት",
+        nav_work: "ስራሕ", nav_contact: "ተራኸበና", nav_cta: "ተራኸበና",
+        hero_eyebrow: "ሰላም፣ ኣነ", hero_title: "Creative<br><span>Director</span> ኢየ",
+        hero_subtitle: "ካብ ማሕበራዊ ሚዲያ ክሳብ ዓብይ ፍረዘተታት፣ ብራንዶታት እንሰርሕ። ዝበለጸ ይዘት ከም ዘይተሰማማዕ ዝስማዕ ክኸውን ኣለዎ።",
+        tag_social: "ማሕበራዊ ሚዲያ", tag_video: "Video Editor", tag_event: "Event Organizer", tag_camera: "Camera Man",
+        hero_cta_primary: "ንሰርሕ", hero_cta_secondary: "ስራሕይ ርአ →",
+        hero_card_title: "Alex Voss", hero_card_desc: "Creative Director & Visual Storyteller",
+        ticker_social: "ማሕበራዊ ሚዲያ ምምሕዳር", ticker_video: "Video Editing",
+        ticker_event: "ዝግጅታት ምድላው", ticker_photo: "ፎቶግራፍ እና ካሜራ",
+        ticker_content: "ይዘት ምፍጣር", ticker_brand: "Brand Strategy",
+        about_label: "ብዛዕባ ስራሕ", about_headline: "ትሕዝቶ<br>ዘለዎ<br>ልምድታት",
+        btn_collaborate: "ንሰርሕ", btn_see_work: "ስራሕይ ርአ →",
+        stat_projects: "ዝተወደአ ስራሕ", stat_clients: "ዝተረኸቡ ደሎማት", stat_years: "ዓመታት ልምዲ",
+        about_desc1: "ብዙሕ ዘርፋዊ የፍጠራ ሞያዊ፣ ዲጂታል መገናኛታት፣ ሲኒማቲክ ቪዥዋልስ፣ እና ዘይረሳዕ ዝግጅታት ንምፍጣር ዝሰርሕ።",
+        about_desc2: "ብራንድ ኣብ ማሕበራዊ ሚዲያ ምዕባይ፣ ታሪኽ ብካሜራ ምቕራጽ፣ ወይ ዝግጅት ብትክክል ምምሕዳር — ንኹሉ ፕሮጀክት ትክክለኛነትን ፍቕርን ኣእቱ።",
+        skill_social: "ማሕበራዊ ሚዲያ ስትራተጂ", skill_video: "Video Editing (Premiere / DaVinci)",
+        skill_event: "Event Production", skill_photo: "Photography & Cinematography",
+        services_label: "እንታይ ንህብ", services_title: "ንተጽዕኖ<br><span style='color:var(--accent)'>ዝተሰርሑ</span> ኣገልግሎታት",
+        service_1_title: "ማሕበራዊ ሚዲያ ምምሕዳር", service_1_desc: "ኣብ Instagram፣ TikTok፣ YouTube & LinkedIn ሙሉእ ምውዳቕ። ስትራተጂ፣ ዕለታዊ መወሃሪ፣ ጽሑፍ፣ መርሃ ግብር፣ ትንተና እና ዕድገት።",
+        service_2_title: "Video Editing", service_2_desc: "ሲኒማቲክ ኣቕራጾት፣ color grading፣ motion graphics፣ sound design፣ reels፣ YouTube videos፣ commercials እና event highlights።",
+        service_3_title: "ዝግጅታት ምድላው", service_3_desc: "ካብ ሓሳብ ክሳብ ትግባረ ሙሉእ ዝግጅት ምፍጣር። Corporate launches፣ brand activations፣ concerts፣ weddings፣ እና private experiences።",
+        service_4_title: "ፎቶግራፍ እና ካሜራ ስራሕ", service_4_desc: "ፕሮፌሽናል DSLR እና ሲኒማ ካሜራ። Portrait፣ commercial፣ event፣ እና documentary photography።",
+        service_5_title: "Freelance Consulting", service_5_desc: "ንstartups፣ agencies፣ እና brands ተለዋዋጭ የፍጠራ ምኽር። Remote ወይ on-site። Short sprints ወይ long-term partnerships።",
+        cta_card_title: "ኣስደናቒ ነገር ንምህራም ድሉዋት ዲኻ?", cta_card_desc: "ብሓባር ትርጉም ዘለዎ ስራሕ ንሰርሕ። ንሓድሽ ፕሮጀክታት ወትሩ ክፉት ኢየ።", cta_card_btn: "ፕሮጀክት ምጅማር →",
+        work_label: "ፖርትፎሊዮ", work_title: "ዝተመረጹ <span style='color:var(--accent)'>ስራሓት</span>",
+        process_label: "ኣንጻር ኣገልግሎት", process_title: "የፍጠራ<br>ስርዓተ-ጥቅሚይ",
+        process_desc: "ኩሉ ዓቢ ፕሮጀክት ብምስማዕ ይጅምር። ኣብ ግዜ ውጽኢት ዘረጋግጽ ኣረጋዊ ስርዓተ-ጥቅሚ እከተል።",
+        step_1_title: "Discovery & Strategy", step_1_desc: "ንብራንድኩም፣ ግብታትኩም፣ ተዓዘብቲ፣ እና ተቐዳደምቲ ኣብ ጥልቅ ንመርምር። ቅድሚ ሓደ ፍረም ክንሰርሕ ድሌትና ኣብራሪ።",
+        step_2_title: "Creative Concepting", step_2_desc: "Moodboards፣ storyboards፣ content calendars። ኩሉ ዝርዝር ንብራንድ identityን campaign goalsን ክዛመድ ኢዩ።",
+        step_3_title: "Production & Execution", step_3_desc: "Lights፣ camera፣ action። ኣብ set ወይ live event፣ ብፕሮፌሽናል መሳርሕ ሙሉእ creative execution ኣብርሃ።",
+        step_4_title: "Delivery & Growth", step_4_desc: "ወሳኒ መረዳእታታት ተላልፎም፣ ተሓትሙ፣ እና ተኸታተሉ። ንውጽኢት ንምምሕያሽ እና ROI ንምብዛሕ ዘለኹም performance analysis።",
+        testimonials_label: "ፍቕሪ ደሎማት", testimonials_title: "እንታይ <span style='color:var(--accent)'>ይብሉ</span>",
+        contact_label: "ተራኸበና", contact_title: "ኣስደናቒ<br>ነገር <span>ንህርም።</span>",
+        contact_desc: "ፕሮጀክት ኣለካ? ንfreelance፣ collaborations፣ እና long-term partnerships ክፉት ኢየ። ነገር ዘይረሳዕ ንህርም።",
+        contact_email_label: "ኢሜይል", contact_phone_label: "ቴለፎን",
+        contact_location_label: "ኣካባቢ", contact_location_value: "New York · ኣብ ዓለም ሙሉእ",
+        contact_availability_label: "ክፉትነት", contact_availability_value: "ፕሮጀክት ንምቕባል",
+        contact_cta: "ንዘራኽብ ጀምር"
+      }
+    };
+
+    let currentLang = 'en';
+    let currentTheme = 'dark';
+
+    /* ── LOADER ── */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1600);
+    });
+
+    /* ── SCROLL PROGRESS ── */
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (window.scrollY / total * 100) + '%';
+    });
+
+    /* ── NAV SCROLL ── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    /* ── MOBILE MENU ── */
+    function toggleMobileMenu() {
+      const navLinks = document.getElementById('navLinks');
+      const hamburger = document.getElementById('hamburger');
+      navLinks.classList.toggle('open');
+      const spans = hamburger.querySelectorAll('span');
+      spans[0].style.transform = navLinks.classList.contains('open') ? 'rotate(45deg) translate(5px,5px)' : '';
+      spans[1].style.opacity = navLinks.classList.contains('open') ? '0' : '1';
+      spans[2].style.transform = navLinks.classList.contains('open') ? 'rotate(-45deg) translate(5px,-5px)' : '';
+    }
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); });
+    });
+
+    /* ── LANGUAGE TOGGLE ── */
+    function toggleLangMenu() {
+      const menu = document.getElementById('langMenu');
+      const arrow = document.getElementById('langArrow');
+      menu.classList.toggle('open');
+      arrow.style.transform = menu.classList.contains('open') ? 'rotate(180deg)' : '';
+    }
+    function setLang(lang) {
+      currentLang = lang;
+      // Update UI
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.lang === lang);
+      });
+      const flagMap = { en: '🇬🇧', am: '🇪🇹', om: '🇪🇹', ti: '🇪🇹' };
+      const labelMap = { en: 'EN', am: 'AM', om: 'OM', ti: 'TI' };
+      document.getElementById('currentFlag').textContent = flagMap[lang];
+      document.getElementById('currentLang').textContent = labelMap[lang];
+      document.getElementById('langMenu').classList.remove('open');
+      document.getElementById('langArrow').style.transform = '';
+
+      // Apply translations
+      applyTranslations();
+
+      // Set RTL for Amharic, Oromo, Tigrinya
+      if (lang === 'am' || lang === 'om' || lang === 'ti') {
+        document.documentElement.setAttribute('dir', 'rtl');
+      } else {
+        document.documentElement.removeAttribute('dir');
+      }
+
+      // Save preference
+      localStorage.setItem('lang', lang);
+    }
+    function applyTranslations() {
+      const t = translations[currentLang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (t[key]) {
+          if (key === 'hero_title' || key === 'services_title' || key === 'work_title' || key === 'process_title' || key === 'testimonials_title' || key === 'contact_title' || key === 'about_headline' || key === 'cta_card_title') {
+            el.innerHTML = t[key];
+          } else {
+            el.textContent = t[key];
+          }
+        }
+      });
+    }
+
+    /* ── THEME TOGGLE ── */
+    function toggleTheme() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('theme', currentTheme);
+    }
+
+    /* ── LOAD SAVED PREFERENCES ── */
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang && translations[savedLang]) setLang(savedLang);
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) { currentTheme = savedTheme; document.body.setAttribute('data-theme', savedTheme); }
+
+    /* ── INTERSECTION OBSERVER ── */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ── COUNTER ANIMATION ── */
+    function animateCount(el) {
+      const target = parseInt(el.dataset.count);
+      let start = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { start = target; clearInterval(timer); }
+        el.textContent = Math.floor(start) + (target >= 100 ? '+' : target <= 10 ? '' : '+');
+      }, 20);
+    }
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    /* ── SKILL BARS ── */
+    const barObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.width = entry.target.dataset.width + '%';
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.skill-bar-fill').forEach(el => barObserver.observe(el));
+
+    /* ── 3D TILT STAT BOXES ── */
+    document.querySelectorAll('.tilt-3d').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(600px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg) translateZ(10px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) translateZ(0)';
+      });
+    });
+
+    /* ── 3D TILT SERVICE CARDS ── */
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(800px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateY(-12px) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+
+    /* ── HERO GLASS CARD TILT ── */
+    const heroGlassCard = document.getElementById('heroGlassCard');
+    if (heroGlassCard) {
+      heroGlassCard.addEventListener('mousemove', e => {
+        const rect = heroGlassCard.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        heroGlassCard.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateZ(30px)`;
+      });
+      heroGlassCard.addEventListener('mouseleave', () => {
+        heroGlassCard.style.transform = '';
+      });
+    }
+
+    /* ── PARALLAX HERO ── */
+    const heroImg = document.querySelector('.hero-bg-img');
+    window.addEventListener('scroll', () => {
+      if (heroImg) heroImg.style.transform = `translateY(${window.scrollY * .35}px)`;
+    });
+
+    /* ── PROCESS MOBILE FIX ── */
+    const processCols = document.querySelector('.process-cols');
+    function fixProcessCols() {
+      if (window.innerWidth < 768) {
+        processCols.style.gridTemplateColumns = '1fr';
+        processCols.style.gap = '2rem';
+      } else {
+        processCols.style.gridTemplateColumns = '1fr 1fr';
+        processCols.style.gap = '5rem';
+      }
+    }
+    if (processCols) { fixProcessCols(); window.addEventListener('resize', fixProcessCols); }
+
+    /* ── ACTIVE NAV HIGHLIGHT ── */
+    const sections = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 200) current = s.id;
+      });
+      navAnchors.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    });
+
+    /* ── PARTICLES ── */
+    (function createParticles() {
+      const hero = document.getElementById('hero');
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        const size = Math.random() * 6 + 2;
+        p.style.cssText = `
+          position:absolute; width:${size}px; height:${size}px;
+          background:rgba(255,${80 + Math.random() * 80},0,${.2 + Math.random() * .4});
+          border-radius:50%; left:${Math.random() * 100}%; top:${Math.random() * 100}%;
+          pointer-events:none; z-index:1;
+          animation: float-p ${4 + Math.random() * 6}s ease-in-out infinite;
+          animation-delay:${Math.random() * 4}s;
+        `;
+        hero.appendChild(p);
+      }
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes float-p {
+          0%,100%{transform:translateY(0) scale(1);opacity:.4}
+          50%{transform:translateY(-${20 + Math.random() * 30}px) scale(1.3);opacity:.9}
+        }
+      `;
+      document.head.appendChild(style);
+    })();
+
+    /* ── CLOSE DROPDOWN ON CLICK OUTSIDE ── */
+    document.addEventListener('click', (e) => {
+      const dropdown = document.getElementById('langDropdown');
+      if (!dropdown.contains(e.target)) {
+        document.getElementById('langMenu').classList.remove('open');
+        document.getElementById('langArrow').style.transform = '';
+      }
+    });
+  </script>
+</body>
+
+</html>
