@@ -12,47 +12,124 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <style>
+    /*
+    ╔══════════════════════════════════════════════════════════════════╗
+    ║          WEBSITE CUSTOMIZATION GUIDE (No Coding Needed!)        ║
+    ╠══════════════════════════════════════════════════════════════════╣
+    ║                                                                  ║
+    ║  COLORS → Look for "CSS VARIABLES" section below (~line 20)     ║
+    ║            Change the hex values like #C9A227 to any color.     ║
+    ║            Use Google "color picker" to find hex codes.         ║
+    ║                                                                  ║
+    ║  TEXT   → Search this file for data-i18n="..." attributes in    ║
+    ║            the HTML, or edit the "TRANSLATIONS" block in the    ║
+    ║            JavaScript section near the bottom of this file.     ║
+    ║                                                                  ║
+    ║  IMAGES → Search for src="..." and replace the URL with your    ║
+    ║            own image file name or web URL.                      ║
+    ║                                                                  ║
+    ║  FONTS  → The <link> tags near the top of the file control      ║
+    ║            fonts. Visit fonts.google.com to find alternatives.  ║
+    ║                                                                  ║
+    ╚══════════════════════════════════════════════════════════════════╝
+    */
     /* ═══════════════════════════════════════════════════════════════
        CSS VARIABLES — EASY TO EDIT (No code knowledge needed!)
-       Just change the hex codes below to customize colors.
+       ───────────────────────────────────────────────────────────────
+       HOW TO CHANGE COLORS:
+         1. Find the color you want to change below
+         2. Replace the hex code (e.g. #C9A227) with your new color
+         3. Save the file and refresh your browser
+       
+       GOLD COLOR REFERENCE:
+         Deep Amber Gold → #B8750A    (used for buttons, highlights — warm, NOT yellow)
+         Bright Amber    → #D4920C    (used for hover states)
+         Pure Black      → #000000    (pure background)
+         Warm Black      → #0f0e0a   (card background — has a hint of warmth)
        ═══════════════════════════════════════════════════════════════ */
     :root {
-      /* ── DARK THEME (Default) ── */
+      /* ── DARK THEME (Default — Gold & Black) ──────────────────── */
+
+      /* --- BACKGROUNDS --- */
       --bg-primary: #0a0a0a;
+      /* Main page background (darkest black) */
       --bg-secondary: #111111;
-      --bg-tertiary: #1a1a1a;
+      /* Slightly lighter black (nav, ticker) */
+      --bg-tertiary: #141414;
+      /* Section alternates (services, process) */
+
+      /* --- TEXT COLORS --- */
       --text-primary: #ffffff;
+      /* Main headings & body text */
       --text-secondary: rgba(255, 255, 255, 0.75);
-      --text-muted: rgba(255, 255, 255, 0.55);
-      --accent: #ff4d00;
-      --accent-light: #ff6a1a;
-      --accent-glow: rgba(255, 77, 0, 0.45);
-      --border-color: rgba(255, 255, 255, 0.07);
-      --glass-bg: rgba(17, 17, 17, 0.6);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      --card-bg: #111111;
-      --hero-gradient: linear-gradient(135deg, #1a0800 0%, #3d0f00 30%, #c23000 65%, #ff5500 100%);
+      /* Subtitles, descriptions */
+      --text-muted: rgba(255, 255, 255, 0.50);
+      /* Labels, hints */
+
+      /* --- GOLD ACCENT (the star of the show!) --- */
+      --accent: #B8750A;
+      /* ★ MAIN GOLD — deep amber gold (not yellow) */
+      --accent-light: #D4920C;
+      /* Slightly brighter amber for hover/gradients */
+      --accent-glow: rgba(184, 117, 10, 0.40);
+      /* Warm amber glow for shadows */
+
+      /* --- BORDERS & GLASS CARDS --- */
+      --border-color: rgba(184, 117, 10, 0.15);
+      /* Subtle amber-tinted borders */
+      --glass-bg: rgba(10, 8, 2, 0.70);
+      /* Glass card background */
+      --glass-border: rgba(184, 117, 10, 0.18);
+      /* Glass card border */
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      /* Glass card shadow */
+      --card-bg: #0f0e0a;
+      /* Solid card background (very dark warm black) */
+
+      /* --- HERO GRADIENT --- */
+      --hero-gradient: linear-gradient(135deg, #000000 0%, #120d02 30%, #2a1d04 65%, #120d02 100%);
+
+      /* --- NOISE TEXTURE INTENSITY (0 = off, 0.05 = max) --- */
       --noise-opacity: 0.025;
     }
 
-    /* ── LIGHT THEME (Midnight Gold from image) ── */
+    /* ── LIGHT THEME (Gold & Cream) ──────────────────────────────── */
     [data-theme="light"] {
-      --bg-primary: #f5f3f0;
+      /* --- BACKGROUNDS --- */
+      --bg-primary: #f7f3e8;
+      /* Warm cream base */
       --bg-secondary: #ffffff;
-      --bg-tertiary: #ebe8e3;
-      --text-primary: #1a1a1a;
-      --text-secondary: rgba(26, 26, 26, 0.75);
-      --text-muted: rgba(26, 26, 26, 0.55);
-      --accent: #5e4b43;
-      --accent-light: #7a6558;
-      --accent-glow: rgba(94, 75, 67, 0.35);
-      --border-color: rgba(26, 26, 26, 0.08);
-      --glass-bg: rgba(255, 255, 255, 0.65);
-      --glass-border: rgba(94, 75, 67, 0.15);
-      --glass-shadow: 0 8px 32px rgba(94, 75, 67, 0.15);
+      /* Pure white for cards */
+      --bg-tertiary: #ede8d5;
+      /* Slightly darker cream for sections */
+
+      /* --- TEXT COLORS --- */
+      --text-primary: #1a1500;
+      /* Near-black for headings */
+      --text-secondary: rgba(26, 21, 0, 0.75);
+      /* Slightly lighter body text */
+      --text-muted: rgba(26, 21, 0, 0.50);
+      /* Labels, hints */
+
+      /* --- GOLD ACCENT (darker amber for contrast on light bg) --- */
+      --accent: #8B5A08;
+      /* Darker amber (readable on cream) */
+      --accent-light: #B8750A;
+      /* Medium amber for hover states */
+      --accent-glow: rgba(139, 90, 8, 0.30);
+      /* Amber glow */
+
+      /* --- BORDERS & GLASS CARDS --- */
+      --border-color: rgba(139, 90, 8, 0.12);
+      --glass-bg: rgba(255, 248, 235, 0.75);
+      --glass-border: rgba(139, 90, 8, 0.20);
+      --glass-shadow: 0 8px 32px rgba(139, 90, 8, 0.12);
       --card-bg: #ffffff;
-      --hero-gradient: linear-gradient(135deg, #ebe8e3 0%, #d4cdc4 30%, #b8a99a 65%, #9e8d7e 100%);
+
+      /* --- HERO GRADIENT --- */
+      --hero-gradient: linear-gradient(135deg, #f7f0e0 0%, #e8d5a0 30%, #c8a050 65%, #b8750a 100%);
+
+      /* --- NOISE TEXTURE INTENSITY --- */
       --noise-opacity: 0.015;
     }
 
@@ -440,7 +517,7 @@
     .hero-bg-img {
       position: absolute;
       inset: 0;
-      background-image: url('https://images.pexels.com/photos/13884518/pexels-photo-13884518.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800');
+      background-image: url('IMG_20260517_122255_175.jpg');
       background-size: cover;
       background-position: center top;
       opacity: .25;
@@ -1980,6 +2057,119 @@
         right: -2.6rem;
       }
     }
+
+    /* ── GLITCH TEXT EFFECT (hero title) ── */
+    .glitch {
+      position: relative;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      color: var(--accent);
+      pointer-events: none;
+    }
+
+    .glitch::before {
+      clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+      animation: glitch-top 4s infinite linear;
+      opacity: 0.7;
+    }
+
+    .glitch::after {
+      clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+      animation: glitch-bot 4s infinite linear;
+      opacity: 0.7;
+    }
+
+    @keyframes glitch-top {
+
+      0%,
+      90%,
+      100% {
+        transform: translate(0);
+      }
+
+      92% {
+        transform: translate(-3px, 1px);
+      }
+
+      94% {
+        transform: translate(3px, -1px);
+      }
+
+      96% {
+        transform: translate(-2px, 0);
+      }
+    }
+
+    @keyframes glitch-bot {
+
+      0%,
+      90%,
+      100% {
+        transform: translate(0);
+      }
+
+      92% {
+        transform: translate(3px, -1px);
+      }
+
+      94% {
+        transform: translate(-3px, 1px);
+      }
+
+      96% {
+        transform: translate(2px, 0);
+      }
+    }
+
+    /* ── FLOAT ANIMATION FOR SERVICE CARDS ── */
+    /* Each card gently bobs up and down at slightly different timings */
+    .float-card-3d {
+      animation: card-float 6s ease-in-out infinite;
+    }
+
+    .float-card-3d:nth-child(2) {
+      animation-delay: -1s;
+    }
+
+    .float-card-3d:nth-child(3) {
+      animation-delay: -2s;
+    }
+
+    .float-card-3d:nth-child(4) {
+      animation-delay: -3s;
+    }
+
+    .float-card-3d:nth-child(5) {
+      animation-delay: -4s;
+    }
+
+    /* Pause float animation on hover so 3D tilt can take over cleanly */
+    .float-card-3d:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes card-float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
   </style>
 </head>
 
@@ -2101,9 +2291,7 @@
         <div class="hero-glass-card" id="heroGlassCard">
           <div class="hero-card-img">
             <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
-            <img
-              src="IMG_20260517_122255_175.jpg"
-              alt="Zerubabel Anteneh - Creative Director" loading="lazy" />
+            <img src="IMG_20260517_122255_175.jpg" alt="Zerubabel Anteneh - Creative Director" loading="lazy" />
           </div>
           <div class="hero-card-content">
             <h3 data-i18n="hero_card_title">Zerubabel Anteneh</h3>
@@ -2242,9 +2430,7 @@
               Recommended size: 600x800px (3:4 ratio)
               ============================================
             -->
-            <img
-              src="IMG_20260517_122255_175.jpg"
-              alt="Your Profile Photo" loading="lazy" />
+            <img src="IMG_20260517_122255_175.jpg" alt="Your Profile Photo" loading="lazy" />
           </div>
           <!-- Floating decorative badges -->
           <div class="profile-deco profile-deco-1">5+ Years</div>
@@ -2782,12 +2968,8 @@
   <!-- ═══════════════════════════════ FOOTER ══════════════════════════════════ -->
   <footer>
     <div class="footer-logo">Zerubabel<span>.</span>Anteneh</div>
-    <div class="footer-copy">© 2026 Zerubabel Anteneh. All rights reserved. Crafted with
-      <svg style="display:inline;vertical-align:middle;margin-left:3px" width="14" height="14" viewBox="0 0 24 24"
-        fill="var(--accent)" stroke="none">
-        <path
-          d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-      </svg>
+    <div class="footer-copy">© 2026 Zerubabel Anteneh. All rights reserved. Crafted By AK Digital Marketing
+      
     </div>
     <div class="footer-socials">
       <a href="#" class="social-btn" title="Instagram">
@@ -3051,12 +3233,9 @@
       // Apply translations
       applyTranslations();
 
-      // Set RTL for Amharic, Oromo, Tigrinya
-      if (lang === 'am' || lang === 'om' || lang === 'ti') {
-        document.documentElement.setAttribute('dir', 'rtl');
-      } else {
-        document.documentElement.removeAttribute('dir');
-      }
+      // ── NOTE: Ethiopic languages (Amharic, Afaan Oromo, Tigrinya) are LTR
+      // Only set RTL for actual right-to-left languages like Arabic, Hebrew, etc.
+      document.documentElement.removeAttribute('dir');
 
       // Save preference
       localStorage.setItem('lang', lang);
@@ -3210,7 +3389,7 @@
         const size = Math.random() * 6 + 2;
         p.style.cssText = `
           position:absolute; width:${size}px; height:${size}px;
-          background:rgba(255,${80 + Math.random() * 80},0,${.2 + Math.random() * .4});
+          background:rgba(${180 + Math.floor(Math.random() * 50)},${130 + Math.floor(Math.random() * 40)},${10 + Math.floor(Math.random() * 20)},${.2 + Math.random() * .4});
           border-radius:50%; left:${Math.random() * 100}%; top:${Math.random() * 100}%;
           pointer-events:none; z-index:1;
           animation: float-p ${4 + Math.random() * 6}s ease-in-out infinite;
