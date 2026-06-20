@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=" en">
 
 <head>
   <meta charset="UTF-8" />
@@ -2170,7 +2170,255 @@
         transform: translateY(-8px);
       }
     }
+
+    /* ── PRICING PACKAGES ── */
+    #pricing {
+      background: var(--bg-primary);
+      padding: 7rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .5s cubic-bezier(.23, 1, .32, 1), box-shadow .5s;
+      display: flex;
+      flex-direction: column;
+      min-height: 580px;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 70px var(--accent-glow);
+    }
+
+    .pricing-card.silver {
+      background: linear-gradient(135deg, #c9a84c 0%, #b8943a 50%, #a67c2e 100%);
+      color: #1a1500;
+    }
+
+    .pricing-card.gold {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 50%, #1a1500 100%);
+      border: 1px solid var(--glass-border);
+      color: rgba(245, 224, 186, 0.924);
+    }
+
+    .pricing-card.platinum {
+      background: linear-gradient(135deg, #d4af37 0%, #c5a028 50%, #b8941a 100%);
+      color: #1a1500;
+    }
+
+    .pricing-card.gold .pricing-features li,
+    .pricing-card.gold .pricing-desc {
+      color: rgba(245, 224, 186, 0.924);
+    }
+
+    .pricing-card.gold .pricing-price {
+      color: rgba(245, 224, 186, 0.924);
+    }
+
+    .pricing-card.gold .pricing-cta {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .pricing-card.gold .pricing-cta:hover {
+      background: var(--accent-light);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: .4rem 1rem;
+      border-radius: 50px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .pricing-card.gold .pricing-badge {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .pricing-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      margin-bottom: .5rem;
+      letter-spacing: 1px;
+    }
+
+    .pricing-subtitle {
+      font-size: 1.1rem;
+      font-weight: 600;
+      opacity: .8;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .pricing-divider {
+      height: 2px;
+      background: linear-gradient(90deg, currentColor, transparent);
+      opacity: .3;
+      margin: 1.5rem 0;
+    }
+
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem 0;
+      flex-grow: 1;
+    }
+
+    .pricing-features li {
+      padding: .6rem 0;
+      font-size: .9rem;
+      font-weight: 500;
+      line-height: 1.5;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+    }
+
+    .pricing-features li:last-child {
+      border-bottom: none;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .pricing-card.gold .pricing-features li {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .pricing-price-wrap {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 1rem;
+    }
+
+    .pricing-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .pricing-price span {
+      font-size: 1.2rem;
+      opacity: .7;
+      font-weight: 500;
+    }
+
+    .pricing-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      width: 100%;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-top: 1.5rem;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s, background .3s;
+    }
+
+    .pricing-card.silver .pricing-cta,
+    .pricing-card.platinum .pricing-cta {
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+    }
+
+    .pricing-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .pricing-card.gold .pricing-cta:hover {
+      box-shadow: 0 12px 40px var(--accent-glow);
+    }
+
+    .pricing-glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .3;
+      pointer-events: none;
+    }
+
+    .pricing-glow-1 {
+      background: #d4af37;
+      top: -50px;
+      left: -50px;
+    }
+
+    .pricing-glow-2 {
+      background: #c9a84c;
+      bottom: -50px;
+      right: -50px;
+    }
+
+    @media(max-width:1024px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+
+      .pricing-card {
+        min-height: auto;
+      }
+    }
+
+    @media(max-width:768px) {
+      #pricing {
+        padding: 4rem 1.5rem;
+      }
+
+      .pricing-name {
+        font-size: 2.2rem;
+      }
+
+      .pricing-price {
+        font-size: 2.6rem;
+      }
+    }
   </style>
+  <base target="_blank">
 </head>
 
 <body data-theme="dark">
@@ -2199,6 +2447,7 @@
       <a href="#about" data-i18n="nav_about">About</a>
       <a href="#services" data-i18n="nav_services">Services</a>
       <a href="#work" data-i18n="nav_work">Work</a>
+      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
       <a href="#contact" data-i18n="nav_contact">Contact</a>
       <a href="#contact" class="nav-cta glow-pulse" data-i18n="nav_cta">Get in touch <span class="dot"></span></a>
     </div>
@@ -2268,7 +2517,8 @@
     <div class="hero-content">
       <div class="hero-left">
         <div class="hero-eyebrow" data-i18n="hero_eyebrow">Hey, I'm a</div>
-        <h1 class="hero-title glitch" data-text="Creative" data-i18n="hero_title">Creative<br><span>Director</span></h1>
+        <h1 class="hero-title glitch" data-text="Creative" data-i18n="hero_title">Creative<br><span>Director</span>
+        </h1>
         <p class="hero-subtitle" data-i18n="hero_subtitle">From reels to red carpets, I build brands that connect,
           convert, and captivate. Great content should feel effortless.</p>
         <div class="hero-tags">
@@ -2440,7 +2690,8 @@
       </div>
       <!-- RIGHT: Text Content -->
       <div>
-        <h2 class="about-headline reveal" data-i18n="about_headline">Shaping Experiences<br>That Make Life<br>Memorable
+        <h2 class="about-headline reveal" data-i18n="about_headline">Shaping Experiences<br>That Make
+          Life<br>Memorable
         </h2>
         <div class="about-cta-row reveal">
           <a href="#contact" class="btn-primary" data-i18n="btn_collaborate">
@@ -2543,7 +2794,8 @@
         </div>
         <div class="service-num">#02</div>
         <h3 class="service-title" data-i18n="service_2_title">Video Editing</h3>
-        <p class="service-desc" data-i18n="service_2_desc">Cinematic cuts, color grading, motion graphics, sound design,
+        <p class="service-desc" data-i18n="service_2_desc">Cinematic cuts, color grading, motion graphics, sound
+          design,
           reels, YouTube videos, commercials and event highlight films delivered frame-perfect.</p>
         <div class="service-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff"
             stroke-width="2.5">
@@ -2616,7 +2868,8 @@
               <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
             </svg>
           </div>
-          <h3 class="service-title" style="font-size:1.5rem" data-i18n="cta_card_title">Ready to build something great?
+          <h3 class="service-title" style="font-size:1.5rem" data-i18n="cta_card_title">Ready to build something
+            great?
           </h3>
           <p style="font-size:.85rem;color:rgba(255,255,255,.8);margin-top:.75rem;line-height:1.7"
             data-i18n="cta_card_desc">Let's create meaningful work together. I'm always open to new projects.</p>
@@ -2706,7 +2959,8 @@
           <div class="process-dot">02</div>
           <div class="process-step-num">STEP 02</div>
           <div class="process-step-title" data-i18n="step_2_title">Creative Concepting</div>
-          <p class="process-step-desc" data-i18n="step_2_desc">Moodboards, storyboards, content calendars. Every detail
+          <p class="process-step-desc" data-i18n="step_2_desc">Moodboards, storyboards, content calendars. Every
+            detail
             is planned to align with your brand identity and campaign goals.</p>
         </div>
         <div class="process-step">
@@ -2727,6 +2981,80 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════ PRICING ══════════════════════════════════ -->
+  <section id="pricing">
+    <div class="section-header">
+      <div class="section-label reveal" data-i18n="pricing_label">Investment</div>
+      <h2 class="section-title reveal" data-i18n="pricing_title">Service <span
+          style="color:var(--accent)">Packages</span></h2>
+    </div>
+    <div class="pricing-grid">
+      <!-- Silver Package -->
+      <div class="pricing-card silver reveal" style="transition-delay:0s">
+        <div class="pricing-glow pricing-glow-1"></div>
+        <div class="pricing-badge" data-i18n="pricing_popular">Popular</div>
+        <div class="pricing-name" data-i18n="pricing_silver_name">Silver</div>
+        <div class="pricing-subtitle" data-i18n="pricing_package">Package</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_silver_1">Social Media Setup</li>
+          <li data-i18n="pricing_silver_2">Content Creation</li>
+          <li data-i18n="pricing_silver_3">12 SM Posts & 6 Video Per Month</li>
+          <li data-i18n="pricing_silver_4">Bi-weekly performance reports</li>
+          <li data-i18n="pricing_silver_5">1 Boost per Month (30,000 People Reach)</li>
+        </ul>
+        <div class="pricing-price-wrap">
+          <div class="pricing-price" data-i18n="pricing_silver_price">23,999 <span>ETB</span></div>
+          <a href="#contact" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
+        </div>
+      </div>
+
+      <!-- Gold Package -->
+      <div class="pricing-card gold reveal" style="transition-delay:.15s">
+        <div class="pricing-name" data-i18n="pricing_gold_name">Gold</div>
+        <div class="pricing-subtitle" data-i18n="pricing_package">Package</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_gold_1">Social Media Setup</li>
+          <li data-i18n="pricing_gold_2">Content Creation</li>
+          <li data-i18n="pricing_gold_3">FB Advertisement Campaign</li>
+          <li data-i18n="pricing_gold_4">16 SM Posts & 12 Video Per Month</li>
+          <li data-i18n="pricing_gold_5">Logo & Brochure Design</li>
+          <li data-i18n="pricing_gold_6">Bi-weekly performance reports</li>
+          <li data-i18n="pricing_gold_7">3 Boost per Month (100,000 People Reach)</li>
+        </ul>
+        <div class="pricing-price-wrap">
+          <div class="pricing-price" data-i18n="pricing_gold_price">29,999 <span>ETB</span></div>
+          <a href="#contact" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
+        </div>
+      </div>
+
+      <!-- Platinum Package -->
+      <div class="pricing-card platinum reveal" style="transition-delay:.3s">
+        <div class="pricing-glow pricing-glow-2"></div>
+        <div class="pricing-badge" data-i18n="pricing_best">Best Value</div>
+        <div class="pricing-name" data-i18n="pricing_platinum_name">Platinum</div>
+        <div class="pricing-subtitle" data-i18n="pricing_package">Package</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_platinum_1">Full Branding</li>
+          <li data-i18n="pricing_platinum_2">Social Media Setup</li>
+          <li data-i18n="pricing_platinum_3">Content Creation</li>
+          <li data-i18n="pricing_platinum_4">Customized Advertisement Campaign</li>
+          <li data-i18n="pricing_platinum_5">Website Design & Development</li>
+          <li data-i18n="pricing_platinum_6">Google ADS</li>
+          <li data-i18n="pricing_platinum_7">20 SM Posts & 16 Video Per Month</li>
+          <li data-i18n="pricing_platinum_8">Weekly performance reports</li>
+          <li data-i18n="pricing_platinum_9">5 Boosts per Month (200,000 People Reach)</li>
+        </ul>
+        <div class="pricing-price-wrap">
+          <div class="pricing-price" data-i18n="pricing_platinum_price">49,999 <span>ETB</span></div>
+          <a href="#contact" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════════════════════ TESTIMONIALS ══════════════════════════════════ -->
   <section id="testimonials">
     <div class="section-header">
@@ -2738,7 +3066,8 @@
       <div class="testimonials-track">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Zerubabel transformed our brand's Instagram from 2K to 45K followers in just 4 months. The
+          <p class="testi-text">"Zerubabel transformed our brand's Instagram from 2K to 45K followers in just 4
+            months. The
             content quality is unmatched and our engagement skyrocketed."</p>
           <div class="testi-author">
             <div class="testi-avatar">SC</div>
@@ -2750,7 +3079,8 @@
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"The event was flawless. Zerubabel organized our product launch with 500 guests and it ran
+          <p class="testi-text">"The event was flawless. Zerubabel organized our product launch with 500 guests and it
+            ran
             smoother than any event we've ever done. Truly world-class."</p>
           <div class="testi-author">
             <div class="testi-avatar">MR</div>
@@ -2786,7 +3116,8 @@
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"The commercial Zerubabel shot for us went viral on TikTok. 2.3M views in the first week. Our
+          <p class="testi-text">"The commercial Zerubabel shot for us went viral on TikTok. 2.3M views in the first
+            week. Our
             sales doubled that month. Absolutely incredible work."</p>
           <div class="testi-author">
             <div class="testi-avatar">AM</div>
@@ -2799,7 +3130,8 @@
         <!-- Duplicate for loop -->
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Zerubabel transformed our brand's Instagram from 2K to 45K followers in just 4 months. The
+          <p class="testi-text">"Zerubabel transformed our brand's Instagram from 2K to 45K followers in just 4
+            months. The
             content quality is unmatched and our engagement skyrocketed."</p>
           <div class="testi-author">
             <div class="testi-avatar">SC</div>
@@ -2811,7 +3143,8 @@
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"The event was flawless. zerubabel organized our product launch with 500 guests and it ran
+          <p class="testi-text">"The event was flawless. zerubabel organized our product launch with 500 guests and it
+            ran
             smoother than any event we've ever done. Truly world-class."</p>
           <div class="testi-author">
             <div class="testi-avatar">MR</div>
@@ -2835,7 +3168,8 @@
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"As a startup, we needed someone who could wear many hats. Zerubabel handled social, video,
+          <p class="testi-text">"As a startup, we needed someone who could wear many hats. Zerubabel handled social,
+            video,
             and our launch event all at once — perfectly."</p>
           <div class="testi-author">
             <div class="testi-avatar">DK</div>
@@ -2847,7 +3181,8 @@
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"The commercial Zerubabel shot for us went viral on TikTok. 2.3M views in the first week. Our
+          <p class="testi-text">"The commercial Zerubabel shot for us went viral on TikTok. 2.3M views in the first
+            week. Our
             sales doubled that month. Absolutely incredible work."</p>
           <div class="testi-author">
             <div class="testi-avatar">AM</div>
@@ -2868,7 +3203,8 @@
       <h2 class="contact-big reveal" data-i18n="contact_title">Let's Build<br>Something <span>Iconic.</span></h2>
       <p class="reveal"
         style="margin-top:1.5rem;color:var(--text-muted);font-size:1rem;line-height:1.8;max-width:520px;margin-left:auto;margin-right:auto;"
-        data-i18n="contact_desc">Have a project in mind? I'm available for freelance work, collaborations, and long-term
+        data-i18n="contact_desc">Have a project in mind? I'm available for freelance work, collaborations, and
+        long-term
         partnerships. Let's make something unforgettable.</p>
 
       <!-- Contact Cards -->
@@ -2969,7 +3305,7 @@
   <footer>
     <div class="footer-logo">Zerubabel<span>.</span>Anteneh</div>
     <div class="footer-copy">© 2026 Zerubabel Anteneh. All rights reserved. Crafted By AK Digital Marketing
-      
+
     </div>
     <div class="footer-socials">
       <a href="#" class="social-btn" title="Instagram">
@@ -3010,7 +3346,8 @@
       en: {
         loading: "Loading Portfolio...",
         nav_home: "Home", nav_about: "About", nav_services: "Services",
-        nav_work: "Work", nav_contact: "Contact", nav_cta: "Get in touch",
+        nav_work: "Work", nav_contact: "Contact",
+        nav_pricing: "Pricing", nav_cta: "Get in touch",
         hero_eyebrow: "Hey, I'm a", hero_title: "Creative<br><span>Director</span>",
         hero_subtitle: "From reels to red carpets, I build brands that connect, convert, and captivate. Great content should feel effortless.",
         tag_social: "Social Media", tag_video: "Video Editor", tag_event: "Event Organizer", tag_camera: "Camera Man",
@@ -3050,8 +3387,42 @@
       },
       am: {
         loading: "ፖርትፎሊዮ እየተጫነ ነው...",
+        pricing_label: "ኢንቨስትመንት",
+        pricing_title: "ኣገልግሎታት <span style='color:var(--accent)'>ጥቅሎት</span>",
+        pricing_popular: "ታዋቂ",
+        pricing_best: "ምርጥ ዋጋ",
+        pricing_package: "ጥቅል",
+        pricing_silver_name: "ሲልቨር",
+        pricing_silver_1: "ማሕበራዊ ሚዲያ ምድላው",
+        pricing_silver_2: "ይዘት ፍጣር",
+        pricing_silver_3: "12 ማሕበራዊ ሚዲያ ፖስቶች & 6 ቪድዮታት ኣብ ወርሒ",
+        pricing_silver_4: "ብሁለት ሳምንታት ኣረጋዊ ናይ ኣፈፃፀም ሪፖርታት",
+        pricing_silver_5: "1 Boost ኣብ ወርሒ (30,000 ሰባት ይበጽሑ)",
+        pricing_silver_price: "23,999 ETB",
+        pricing_gold_name: "ጎልድ",
+        pricing_gold_1: "ማሕበራዊ ሚዲያ ምድላው",
+        pricing_gold_2: "ይዘት ፍጣር",
+        pricing_gold_3: "FB Advertisement Campaign",
+        pricing_gold_4: "16 ማሕበራዊ ሚዲያ ፖስቶች & 12 ቪድዮታት ኣብ ወርሒ",
+        pricing_gold_5: "ሎጎ & ብሮሹር ዲዛይን",
+        pricing_gold_6: "ብሁለት ሳምንታት ኣረጋዊ ናይ ኣፈፃፀም ሪፖርታት",
+        pricing_gold_7: "3 Boosts ኣብ ወርሒ (100,000 ሰባት ይበጽሑ)",
+        pricing_gold_price: "29,999 ETB",
+        pricing_platinum_name: "ፕላቲነም",
+        pricing_platinum_1: "ሙሉእ Branding",
+        pricing_platinum_2: "ማሕበራዊ ሚዲያ ምድላው",
+        pricing_platinum_3: "ይዘት ፍጣር",
+        pricing_platinum_4: "Customized Advertisement Campaign",
+        pricing_platinum_5: "Website Design & Development",
+        pricing_platinum_6: "Google ADS",
+        pricing_platinum_7: "20 ማሕበራዊ ሚዲያ ፖስቶች & 16 ቪድዮታት ኣብ ወርሒ",
+        pricing_platinum_8: "ኣብ ኩሉ ሳምንቲ ናይ ኣፈፃፀም ሪፖርታት",
+        pricing_platinum_9: "5 Boosts ኣብ ወርሒ (200,000 ሰባት ይበጽሑ)",
+        pricing_platinum_price: "49,999 ETB",
+        pricing_cta: "ጀምር →",
         nav_home: "መነሻ", nav_about: "ስለ እኔ", nav_services: "አገልግሎቶች",
-        nav_work: "ሥራዎች", nav_contact: "አግኙኝ", nav_cta: "አግኙኝ",
+        nav_work: "ሥራዎች", nav_contact: "አግኙኝ",
+        nav_pricing: "ዋጋ", nav_cta: "አግኙኝ",
         hero_eyebrow: "ሰላም፣ እኔ", hero_title: "የፈጠራ<br><span>ዳይሬክተር</span> ነኝ",
         hero_subtitle: "ከማህበራዊ ሚዲያ እስከ ትልቅ ዝግጅቶች፣ የሚያገናኙ፣ የሚቀይሩ እና የሚሳቡ ብራንዶችን እንገንባለን። ጥሩ ይዘት የማይታወቅ መስሎ እንዲሰማ ያደርገዋል።",
         tag_social: "ማህበራዊ ሚዲያ", tag_video: "የቪዲዮ አርታዒ", tag_event: "የዝግጅት አደራጅ", tag_camera: "ካሜራ ሰራተኛ",
@@ -3091,8 +3462,42 @@
       },
       om: {
         loading: "Portfolio itti gallee...",
+        pricing_label: "ኢንቨስትመንት",
+        pricing_title: "የአገልግሎት <span style='color:var(--accent)'>ጥቅሎች</span>",
+        pricing_popular: "ታዋቂ",
+        pricing_best: "ምርጥ ዋጋ",
+        pricing_package: "ጥቅል",
+        pricing_silver_name: "ሲልቨር",
+        pricing_silver_1: "የማህበራዊ ሚዲያ ማዋቀር",
+        pricing_silver_2: "ይዘት ፍጠር",
+        pricing_silver_3: "12 የማህበራዊ ሚዲያ ፖስቶች እና 6 ቪዲዮዎች በወር",
+        pricing_silver_4: "በሁለት ሳምንታት አንዴ የአፈፃፀም ሪፖርቶች",
+        pricing_silver_5: "በወር 1 ቡስት (30,000 ሰዎች ይደርሳሉ)",
+        pricing_silver_price: "23,999 ETB",
+        pricing_gold_name: "ጎልድ",
+        pricing_gold_1: "የማህበራዊ ሚዲያ ማዋቀር",
+        pricing_gold_2: "ይዘት ፍጠር",
+        pricing_gold_3: "የፌስቡክ የማስታወቂያ ዘመቻ",
+        pricing_gold_4: "16 የማህበራዊ ሚዲያ ፖስቶች እና 12 ቪዲዮዎች በወር",
+        pricing_gold_5: "ሎጎ እና ብሮሸር ዲዛይን",
+        pricing_gold_6: "በሁለት ሳምንታት አንዴ የአፈፃፀም ሪፖርቶች",
+        pricing_gold_7: "በወር 3 ቡስቶች (100,000 ሰዎች ይደርሳሉ)",
+        pricing_gold_price: "29,999 ETB",
+        pricing_platinum_name: "ፕላቲነም",
+        pricing_platinum_1: "ሙሉ የብራንድ አዋቅር",
+        pricing_platinum_2: "የማህበራዊ ሚዲያ ማዋቀር",
+        pricing_platinum_3: "ይዘት ፍጠር",
+        pricing_platinum_4: "ብጁ የማስታወቂያ ዘመቻ",
+        pricing_platinum_5: "የድህረ ገጽ ዲዛይን እና ልማት",
+        pricing_platinum_6: "ጉግል ADS",
+        pricing_platinum_7: "20 የማህበራዊ ሚዲያ ፖስቶች እና 16 ቪዲዮዎች በወር",
+        pricing_platinum_8: "በየሳምንቱ የአፈፃፀም ሪፖርቶች",
+        pricing_platinum_9: "በወር 5 ቡስቶች (200,000 ሰዎች ይደርሳሉ)",
+        pricing_platinum_price: "49,999 ETB",
+        pricing_cta: "ጀምር →",
         nav_home: "Seensa", nav_about: "Waa'ee Koo", nav_services: "Tajaajiloota",
-        nav_work: "Hojiiwwan", nav_contact: "Qunnamaa", nav_cta: "Qunnamaa",
+        nav_work: "Hojiiwwan", nav_contact: "Qunnamaa",
+        nav_pricing: "Gatii", nav_cta: "Qunnamaa",
         hero_eyebrow: "Akkam, Ani", hero_title: "Creative<br><span>Director</span> dha",
         hero_subtitle: "Social media irraa hanga red carpets, brandoota walitti dhufanii, jijjiiranii, ajaa'ibsiisan ijaarra. Qabiyyee gaariin akka hin mul'anne hojjechuu qaba.",
         tag_social: "Social Media", tag_video: "Video Editor", tag_event: "Event Organizer", tag_camera: "Camera Man",
@@ -3132,8 +3537,42 @@
       },
       ti: {
         loading: "Portfolio እየተጫነ ኣሎ...",
+        pricing_label: "Investimeentii",
+        pricing_title: "Tajaajila <span style='color:var(--accent)'>Packagewwan</span>",
+        pricing_popular: "Beekamaa",
+        pricing_best: "Gatii Gaarii",
+        pricing_package: "Packagii",
+        pricing_silver_name: "Silver",
+        pricing_silver_1: "Social Media Setup",
+        pricing_silver_2: "Content Creation",
+        pricing_silver_3: "12 SM Posts & 6 Video Ji'aatti",
+        pricing_silver_4: "Bi-weekly performance reports",
+        pricing_silver_5: "1 Boost Ji'aatti (30,000 Namoota Ga'u)",
+        pricing_silver_price: "23,999 ETB",
+        pricing_gold_name: "Gold",
+        pricing_gold_1: "Social Media Setup",
+        pricing_gold_2: "Content Creation",
+        pricing_gold_3: "FB Advertisement Campaign",
+        pricing_gold_4: "16 SM Posts & 12 Video Ji'aatti",
+        pricing_gold_5: "Logo & Brochure Design",
+        pricing_gold_6: "Bi-weekly performance reports",
+        pricing_gold_7: "3 Boost Ji'aatti (100,000 Namoota Ga'u)",
+        pricing_gold_price: "29,999 ETB",
+        pricing_platinum_name: "Platinum",
+        pricing_platinum_1: "Full Branding",
+        pricing_platinum_2: "Social Media Setup",
+        pricing_platinum_3: "Content Creation",
+        pricing_platinum_4: "Customized Advertisement Campaign",
+        pricing_platinum_5: "Website Design & Development",
+        pricing_platinum_6: "Google ADS",
+        pricing_platinum_7: "20 SM Posts & 16 Video Ji'aatti",
+        pricing_platinum_8: "Weekly performance reports",
+        pricing_platinum_9: "5 Boosts Ji'aatti (200,000 Namoota Ga'u)",
+        pricing_platinum_price: "49,999 ETB",
+        pricing_cta: "Jalqabi →",
         nav_home: "መበገሲ", nav_about: "ብዛዕባይ", nav_services: "ኣገልግሎታት",
-        nav_work: "ስራሕ", nav_contact: "ተራኸበና", nav_cta: "ተራኸበና",
+        nav_work: "ስራሕ", nav_contact: "ተራኸበና",
+        nav_pricing: "ዋጋ", nav_cta: "ተራኸበና",
         hero_eyebrow: "ሰላም፣ ኣነ", hero_title: "Creative<br><span>Director</span> ኢየ",
         hero_subtitle: "ካብ ማሕበራዊ ሚዲያ ክሳብ ዓብይ ፍረዘተታት፣ ብራንዶታት እንሰርሕ። ዝበለጸ ይዘት ከም ዘይተሰማማዕ ዝስማዕ ክኸውን ኣለዎ።",
         tag_social: "ማሕበራዊ ሚዲያ", tag_video: "Video Editor", tag_event: "Event Organizer", tag_camera: "Camera Man",
@@ -3245,7 +3684,7 @@
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
         if (t[key]) {
-          if (key === 'hero_title' || key === 'services_title' || key === 'work_title' || key === 'process_title' || key === 'testimonials_title' || key === 'contact_title' || key === 'about_headline' || key === 'cta_card_title') {
+          if (key === 'hero_title' || key === 'services_title' || key === 'work_title' || key === 'process_title' || key === 'testimonials_title' || key === 'contact_title' || key === 'about_headline' || key === 'cta_card_title' || key === 'pricing_title') {
             el.innerHTML = t[key];
           } else {
             el.textContent = t[key];
