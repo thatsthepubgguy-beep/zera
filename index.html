@@ -436,71 +436,273 @@
       margin-left: auto;
     }
 
-    /* ── HAMBURGER ── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      z-index: 1002;
-    }
+    /* ═══════════════════════════════════════════════════════════════
+   REDESIGNED HAMBURGER MENU POPUP
+   Modern glassmorphism with smooth animations
+   ═══════════════════════════════════════════════════════════════ */
 
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      border-radius: 2px;
-      transition: .3s;
-    }
+/* ── HAMBURGER BUTTON ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1002;
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  transition: all .3s ease;
+}
 
-    @media(max-width:1024px) {
-      .nav-links {
-        gap: 1.5rem;
-      }
-    }
+.hamburger:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
 
-    @media(max-width:768px) {
-      .hamburger {
-        display: flex;
-      }
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all .4s cubic-bezier(.68, -0.55, .27, 1.55);
+  transform-origin: center;
+}
 
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        bottom: 0;
-        width: 80%;
-        max-width: 320px;
-        background: var(--glass-bg);
-        backdrop-filter: blur(30px) saturate(200%);
-        -webkit-backdrop-filter: blur(30px) saturate(200%);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-        transition: right .4s ease;
-        border-left: 1px solid var(--glass-border);
-        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
-        z-index: 1001;
-      }
+/* Hamburger animation when menu is open */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
 
-      .nav-links.open {
-        right: 0;
-      }
+/* ── MOBILE MENU OVERLAY ── */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .4s ease;
+}
 
-      .nav-links a {
-        font-size: 1.1rem;
-      }
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
 
-      nav {
-        padding: 1rem 1.5rem;
-      }
+/* ── REDESIGNED NAV LINKS (MOBILE MENU) ── */
+@media(max-width:768px) {
+  .hamburger {
+    display: flex;
+  }
 
-      .toggles-row {
-        gap: .5rem;
-      }
-    }
+  .nav-links {
+    position: fixed;
+    top: 0.75rem;
+    right: -100%;
+    width: 85%;
+    max-width: 380px;
+    height: auto;
+    max-height: calc(100vh - 1.5rem);
+    background: linear-gradient(165deg, 
+      rgba(10, 10, 10, 0.98) 0%, 
+      rgba(18, 13, 2, 0.97) 50%,
+      rgba(20, 14, 0, 0.98) 100%
+    );
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0;
+    transition: right .5s cubic-bezier(.23, 1, .32, 1);
+    border-left: 1px solid var(--glass-border);
+    border-radius: 24px 0 0 24px;
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5), 
+                0 0 0 1px rgba(184, 117, 10, 0.1);
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 2rem 0;
+    box-sizing: border-box;
+  }
+
+  [data-theme="light"] .nav-links {
+    background: linear-gradient(165deg, 
+      rgba(247, 243, 232, 0.98) 0%, 
+      rgba(237, 232, 213, 0.97) 50%,
+      rgba(255, 248, 235, 0.98) 100%
+    );
+    box-shadow: -20px 0 60px rgba(139, 90, 8, 0.15), 
+                0 0 0 1px rgba(139, 90, 8, 0.12);
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  /* Menu header with decorative element */
+  .nav-links::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(180deg, 
+      var(--accent-glow) 0%, 
+      transparent 100%
+    );
+    opacity: 0.3;
+    pointer-events: none;
+    border-radius: 24px 0 0 0;
+  }
+
+  /* Menu decorative accent line */
+  .nav-links::after {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    border-radius: 3px;
+  }
+
+  /* Individual nav items */
+  .nav-links a {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: all .3s ease;
+    padding: 1.2rem 2.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(184, 117, 10, 0.06);
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  /* Number prefix for each menu item */
+  .nav-links a::before {
+    content: attr(data-num);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent);
+    opacity: 0.6;
+    letter-spacing: 2px;
+    min-width: 28px;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-primary);
+    background: linear-gradient(90deg, 
+      rgba(184, 117, 10, 0.08) 0%, 
+      transparent 100%
+    );
+    padding-left: 3rem;
+  }
+
+  .nav-links a.active {
+    color: var(--accent);
+    background: linear-gradient(90deg, 
+      rgba(184, 117, 10, 0.12) 0%, 
+      transparent 100%
+    );
+  }
+
+  .nav-links a.active::before {
+    opacity: 1;
+  }
+
+  /* CTA Button in mobile menu */
+  .nav-links .nav-cta {
+    margin: 2rem 2.5rem 0;
+    width: calc(100% - 5rem);
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 0.95rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-links .nav-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: translateX(-100%);
+    transition: transform .6s ease;
+  }
+
+  .nav-links .nav-cta:hover::before {
+    transform: translateX(100%);
+  }
+
+  /* Menu footer info */
+  .menu-footer {
+    margin-top: 1.5rem;
+    padding: 1.5rem 2.5rem 0;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
+  }
+
+  .menu-footer-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  .menu-footer-email {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-top: 0.5rem;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity .3s;
+  }
+
+  .menu-footer-email:hover {
+    opacity: 0.8;
+  }
+}
+
+@media(max-width:360px) {
+  .nav-links {
+    width: 90%;
+  }
+  .nav-links a {
+    padding: 1rem 1.8rem;
+    font-size: 1rem;
+  }
+  .nav-links .nav-cta {
+    margin: 1.5rem 1.8rem 0;
+    width: calc(100% - 3.6rem);
+  }
+}
 
     /* ── HERO (ATTRACTIVE) ── */
     #hero {
@@ -1790,6 +1992,8 @@
       flex-direction: column;
       gap: 1.5rem;
       transition: opacity .6s ease, visibility .6s;
+      padding: 0 1.5rem;
+      text-align: center;
     }
 
     #loader.hidden {
@@ -1829,6 +2033,31 @@
 
       to {
         width: 100%
+      }
+    }
+
+    .loader-text {
+      font-size: .78rem;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      max-width: 90vw;
+      white-space: normal;
+    }
+
+    @media(max-width:480px) {
+      .loader-logo {
+        font-size: 2.1rem;
+        letter-spacing: 2px;
+      }
+
+      .loader-text {
+        font-size: .62rem;
+        letter-spacing: 1.5px;
+      }
+
+      .loader-bar-wrap {
+        width: 150px;
       }
     }
 
@@ -2418,7 +2647,6 @@
       }
     }
   </style>
-  <base target="_blank">
 </head>
 
 <body data-theme="dark">
@@ -2432,7 +2660,7 @@
     <div class="loader-bar-wrap">
       <div class="loader-bar"></div>
     </div>
-    <p style="font-size:.78rem;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase" data-i18n="loading">
+    <p class="loader-text" data-i18n="loading">
       Loading Portfolio...</p>
   </div>
 
@@ -2441,15 +2669,22 @@
 
   <!-- ═══════════════════════════════ NAV ══════════════════════════════════ -->
   <nav id="navbar" class="glass">
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
     <div class="nav-logo">One man<span>.</span></div>
-    <div class="nav-links" id="navLinks">
-      <a href="#hero" data-i18n="nav_home">Home</a>
-      <a href="#about" data-i18n="nav_about">About</a>
-      <a href="#services" data-i18n="nav_services">Services</a>
-      <a href="#work" data-i18n="nav_work">Work</a>
-      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
-      <a href="#contact" data-i18n="nav_contact">Contact</a>
-      <a href="#contact" class="nav-cta glow-pulse" data-i18n="nav_cta">Get in touch <span class="dot"></span></a>
+        <div class="nav-links" id="navLinks">
+      <a href="#hero" target="_self" data-i18n="nav_home" data-num="01">Home</a>
+      <a href="#about" target="_self" data-i18n="nav_about" data-num="02">About</a>
+      <a href="#services" target="_self" data-i18n="nav_services" data-num="03">Services</a>
+      <a href="#work" target="_self" data-i18n="nav_work" data-num="04">Work</a>
+      <a href="#pricing" target="_self" data-i18n="nav_pricing" data-num="05">Pricing</a>
+      <a href="#contact" target="_self" data-i18n="nav_contact" data-num="06">Contact</a>
+      <a href="#contact" target="_self" class="nav-cta glow-pulse" data-i18n="nav_cta">Get in touch <span class="dot"></span></a>
+
+      <!-- Menu footer -->
+      <div class="menu-footer">
+        <p class="menu-footer-text">Available for projects</p>
+        <a href="mailto:hello@alexvoss.co" class="menu-footer-email">hello@alexvoss.co</a>
+      </div>
     </div>
     <div class="toggles-row">
       <!-- LANGUAGE -->
@@ -2528,13 +2763,13 @@
           <div class="hero-tag"><span class="num">#04</span><span data-i18n="tag_camera">Camera Man</span></div>
         </div>
         <div class="hero-cta-row">
-          <a href="#contact" class="btn-primary" data-i18n="hero_cta_primary">
+          <a href="#contact" target="_self" class="btn-primary" data-i18n="hero_cta_primary">
             Let's Collaborate
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a href="#work" class="btn-ghost" data-i18n="hero_cta_secondary">See my work →</a>
+          <a href="#work" target="_self" class="btn-ghost" data-i18n="hero_cta_secondary">See my work →</a>
         </div>
       </div>
       <div class="hero-right">
@@ -2694,13 +2929,13 @@
           Life<br>Memorable
         </h2>
         <div class="about-cta-row reveal">
-          <a href="#contact" class="btn-primary" data-i18n="btn_collaborate">
+          <a href="#contact" target="_self" class="btn-primary" data-i18n="btn_collaborate">
             Let's Collaborate
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a href="#work" class="btn-ghost" data-i18n="btn_see_work">See my work →</a>
+          <a href="#work" target="_self" class="btn-ghost" data-i18n="btn_see_work">See my work →</a>
         </div>
         <div class="stats-row reveal">
           <div class="stat-box tilt-3d">
@@ -2874,7 +3109,7 @@
           <p style="font-size:.85rem;color:rgba(255,255,255,.8);margin-top:.75rem;line-height:1.7"
             data-i18n="cta_card_desc">Let's create meaningful work together. I'm always open to new projects.</p>
         </div>
-        <a href="#contact" class="btn-primary"
+        <a href="#contact" target="_self" class="btn-primary"
           style="background:#fff;color:var(--accent);margin-top:1.5rem;align-self:flex-start"
           data-i18n="cta_card_btn">Start a project →</a>
       </div>
@@ -3005,7 +3240,7 @@
         </ul>
         <div class="pricing-price-wrap">
           <div class="pricing-price" data-i18n="pricing_silver_price">23,999 <span>ETB</span></div>
-          <a href="#contact" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
+          <a href="#contact" target="_self" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
         </div>
       </div>
 
@@ -3025,7 +3260,7 @@
         </ul>
         <div class="pricing-price-wrap">
           <div class="pricing-price" data-i18n="pricing_gold_price">29,999 <span>ETB</span></div>
-          <a href="#contact" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
+          <a href="#contact" target="_self" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
         </div>
       </div>
 
@@ -3049,7 +3284,7 @@
         </ul>
         <div class="pricing-price-wrap">
           <div class="pricing-price" data-i18n="pricing_platinum_price">49,999 <span>ETB</span></div>
-          <a href="#contact" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
+          <a href="#contact" target="_self" class="pricing-cta" data-i18n="pricing_cta">Get Started →</a>
         </div>
       </div>
     </div>
@@ -3258,7 +3493,7 @@
 
       <!-- Social Row -->
       <div class="reveal" style="display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap;">
-        <a href="#" class="social-pill">
+        <a href="#" target="_blank" rel="noopener" class="social-pill">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="2" y="2" width="20" height="20" rx="5" />
             <circle cx="12" cy="12" r="5" />
@@ -3266,21 +3501,21 @@
           </svg>
           Instagram
         </a>
-        <a href="#" class="social-pill">
+        <a href="#" target="_blank" rel="noopener" class="social-pill">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path
               d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.24 8.24 0 004.83 1.55V6.79a4.86 4.86 0 01-1.06-.1z" />
           </svg>
           TikTok
         </a>
-        <a href="#" class="social-pill">
+        <a href="#" target="_blank" rel="noopener" class="social-pill">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path
               d="M21.58 7.19a2.52 2.52 0 00-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.52 2.52 0 002.42 7.19 26.3 26.3 0 002 12a26.3 26.3 0 00.42 4.81 2.52 2.52 0 001.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.52 2.52 0 001.77-1.77A26.3 26.3 0 0022 12a26.3 26.3 0 00-.42-4.81zM10 15V9l5.2 3-5.2 3z" />
           </svg>
           YouTube
         </a>
-        <a href="#" class="social-pill">
+        <a href="#" target="_blank" rel="noopener" class="social-pill">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
             <circle cx="4" cy="4" r="2" />
@@ -3308,26 +3543,26 @@
 
     </div>
     <div class="footer-socials">
-      <a href="#" class="social-btn" title="Instagram">
+      <a href="#" target="_blank" rel="noopener" class="social-btn" title="Instagram">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="2" y="2" width="20" height="20" rx="5" />
           <circle cx="12" cy="12" r="5" />
           <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
         </svg>
       </a>
-      <a href="#" class="social-btn" title="TikTok">
+      <a href="#" target="_blank" rel="noopener" class="social-btn" title="TikTok">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path
             d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.24 8.24 0 004.83 1.55V6.79a4.86 4.86 0 01-1.06-.1z" />
         </svg>
       </a>
-      <a href="#" class="social-btn" title="YouTube">
+      <a href="#" target="_blank" rel="noopener" class="social-btn" title="YouTube">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path
             d="M21.58 7.19a2.52 2.52 0 00-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.52 2.52 0 002.42 7.19 26.3 26.3 0 002 12a26.3 26.3 0 00.42 4.81 2.52 2.52 0 001.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.52 2.52 0 001.77-1.77A26.3 26.3 0 0022 12a26.3 26.3 0 00-.42-4.81zM10 15V9l5.2 3-5.2 3z" />
         </svg>
       </a>
-      <a href="#" class="social-btn" title="LinkedIn">
+      <a href="#" target="_blank" rel="noopener" class="social-btn" title="LinkedIn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
           <circle cx="4" cy="4" r="2" />
@@ -3545,9 +3780,9 @@
         pricing_silver_name: "Silver",
         pricing_silver_1: "Social Media Setup",
         pricing_silver_2: "Content Creation",
-        pricing_silver_3: "12 SM Posts & 6 Video Ji'aatti",
+        pricing_silver_3: "12 SM Posts & 6 Video ji'aatti",
         pricing_silver_4: "Bi-weekly performance reports",
-        pricing_silver_5: "1 Boost Ji'aatti (30,000 Namoota Ga'u)",
+        pricing_silver_5: "1 Boost ji'aatti (30,000 Namoota Ga'u)",
         pricing_silver_price: "23,999 ETB",
         pricing_gold_name: "Gold",
         pricing_gold_1: "Social Media Setup",
@@ -3635,21 +3870,48 @@
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    /* ── MOBILE MENU ── */
+        /* ── MOBILE MENU ── */
     function toggleMobileMenu() {
       const navLinks = document.getElementById('navLinks');
       const hamburger = document.getElementById('hamburger');
+      const overlay = document.getElementById('menuOverlay');
+
       navLinks.classList.toggle('open');
-      const spans = hamburger.querySelectorAll('span');
-      spans[0].style.transform = navLinks.classList.contains('open') ? 'rotate(45deg) translate(5px,5px)' : '';
-      spans[1].style.opacity = navLinks.classList.contains('open') ? '0' : '1';
-      spans[2].style.transform = navLinks.classList.contains('open') ? 'rotate(-45deg) translate(5px,-5px)' : '';
+      hamburger.classList.toggle('active');
+
+      if (overlay) {
+        overlay.classList.toggle('active');
+      }
+
+      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     }
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); });
+
+    // Close menu when clicking overlay
+    document.addEventListener('click', (e) => {
+      const navLinks = document.getElementById('navLinks');
+      const hamburger = document.getElementById('hamburger');
+      const overlay = document.getElementById('menuOverlay');
+
+      if (overlay && overlay.contains(e.target)) {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     });
 
-    /* ── LANGUAGE TOGGLE ── */
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        const navLinks = document.getElementById('navLinks');
+        const hamburger = document.getElementById('hamburger');
+        const overlay = document.getElementById('menuOverlay');
+
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });/* ── LANGUAGE TOGGLE ── */
     function toggleLangMenu() {
       const menu = document.getElementById('langMenu');
       const arrow = document.getElementById('langArrow');
