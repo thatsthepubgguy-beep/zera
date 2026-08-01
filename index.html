@@ -2646,7 +2646,221 @@
         font-size: 2.6rem;
       }
     }
+  
+    /* ── VIDEO PORTFOLIO GALLERY ── */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      transition: transform .5s cubic-bezier(.23, 1, .32, 1), box-shadow .5s, border-color .4s;
+      aspect-ratio: 16/9;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 30px 70px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    .video-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.23, 1, .32, 1), filter .5s;
+      filter: grayscale(20%);
+    }
+
+    .video-card:hover .video-thumb {
+      transform: scale(1.08);
+      filter: grayscale(0%);
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.2) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      transition: background .4s;
+    }
+
+    .video-card:hover .video-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,.4) 60%, transparent 100%);
+    }
+
+    .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 64px;
+      height: 64px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px var(--accent-glow);
+      transition: transform .4s cubic-bezier(.23, 1, .32, 1), box-shadow .4s;
+      z-index: 3;
+    }
+
+    .video-card:hover .video-play-btn {
+      transform: translate(-50%, -50%) scale(1.15);
+      box-shadow: 0 0 60px var(--accent-glow);
+    }
+
+    .video-play-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      margin-left: 3px;
+    }
+
+    .video-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: .25rem .75rem;
+      border-radius: 50px;
+      margin-bottom: .5rem;
+      align-self: flex-start;
+    }
+
+    .video-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(10px);
+      padding: .25rem .6rem;
+      border-radius: 6px;
+      font-size: .75rem;
+      font-weight: 600;
+      color: #fff;
+      z-index: 2;
+    }
+
+    /* ── VIDEO MODAL ── */
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .4s ease, visibility .4s;
+    }
+
+    .video-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .video-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .video-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 40px 100px rgba(0,0,0,.8);
+      transform: scale(.9);
+      transition: transform .4s cubic-bezier(.23, 1, .32, 1);
+      z-index: 2;
+    }
+
+    .video-modal.active .video-modal-content {
+      transform: scale(1);
+    }
+
+    .video-modal iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-modal-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: background .3s, transform .3s;
+      z-index: 3;
+    }
+
+    .video-modal-close:hover {
+      background: var(--accent);
+      transform: rotate(90deg);
+    }
+
+    @media(max-width:768px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+      .video-modal {
+        padding: 1rem;
+      }
+      .video-modal-content {
+        border-radius: 12px;
+      }
+      .video-modal-close {
+        top: -45px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
   </style>
+<base target="_blank">
 </head>
 
 <body data-theme="dark">
@@ -3116,58 +3330,21 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════ WORK ══════════════════════════════════ -->
+  <!-- ═══════════════════════════════ WORK / VIDEO PORTFOLIO ══════════════════════════════════ -->
   <section id="work">
     <div class="section-header">
       <div class="section-label reveal" data-i18n="work_label">Portfolio</div>
-      <h2 class="section-title reveal" data-i18n="work_title">Selected <span style="color:var(--accent)">Work</span>
-      </h2>
+      <h2 class="section-title reveal" data-i18n="work_title">Selected <span style="color:var(--accent)">Work</span></h2>
     </div>
-    <div class="work-grid reveal">
-      <div class="work-item">
-        <img
-          src="https://images.pexels.com/photos/30215324/pexels-photo-30215324.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
-          alt="Concert Event" loading="lazy" />
-        <div class="work-overlay"></div>
-        <div class="work-info"><span class="work-tag">Event</span>
-          <div class="work-title">Neon Nights — Music Festival</div>
-        </div>
-      </div>
-      <div class="work-item">
-        <img
-          src="https://images.pexels.com/photos/13884518/pexels-photo-13884518.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800"
-          alt="Studio Portrait" loading="lazy" />
-        <div class="work-overlay"></div>
-        <div class="work-info"><span class="work-tag">Photography</span>
-          <div class="work-title">Editorial Portrait Series</div>
-        </div>
-      </div>
-      <div class="work-item">
-        <img
-          src="https://images.pexels.com/photos/29505140/pexels-photo-29505140.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
-          alt="Video Edit" loading="lazy" />
-        <div class="work-overlay"></div>
-        <div class="work-info"><span class="work-tag">Video</span>
-          <div class="work-title">Brand Commercial Cut</div>
-        </div>
-      </div>
-      <div class="work-item">
-        <img
-          src="https://images.pexels.com/photos/22604116/pexels-photo-22604116.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
-          alt="Crowd Event" loading="lazy" />
-        <div class="work-overlay"></div>
-        <div class="work-info"><span class="work-tag">Event</span>
-          <div class="work-title">Outdoor Crowd Activation</div>
-        </div>
-      </div>
-      <div class="work-item">
-        <img
-          src="https://images.pexels.com/photos/33899322/pexels-photo-33899322.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
-          alt="Video Production" loading="lazy" />
-        <div class="work-overlay"></div>
-        <div class="work-info"><span class="work-tag">Production</span>
-          <div class="work-title">Studio Production Setup</div>
-        </div>
+    <div class="work-grid reveal" id="videoGrid">
+      <!-- Videos are injected here by JavaScript -->
+      <div class="video-placeholder" style="grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--text-muted);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:1rem;opacity:.4">
+          <rect x="2" y="2" width="20" height="20" rx="2"/>
+          <polygon points="10,8 16,12 10,16" fill="currentColor"/>
+        </svg>
+        <p style="font-size:1rem;margin-bottom:.5rem">Loading videos...</p>
+        <p style="font-size:.8rem;opacity:.6">Add your YouTube Video IDs in the script below</p>
       </div>
     </div>
   </section>
@@ -3561,6 +3738,57 @@
   <!-- ═══════════════════════════════ JAVASCRIPT ══════════════════════════════════ -->
   <script>
     /* ═══════════════════════════════════════════════════════════════
+       YOUTUBE VIDEO PORTFOLIO
+       ═══════════════════════════════════════════════════════════════ */
+    const youtubeVideos = [
+      { id: 'FfAovEsREao', title: 'Project 1', tag: 'Video Production' },
+      { id: 'nE-R7HhvZXc', title: 'Project 2', tag: 'Video Editing' },
+      { id: 'QdmB3trZF-I', title: 'Project 3', tag: 'Creative Work' },
+      { id: 'UEi_tYboyhI', title: 'Short 1', tag: 'Shorts' },
+      { id: 'qlFrTyiO_1Q', title: 'Short 2', tag: 'Shorts' },
+      { id: '-nzPl9WN0u4', title: 'Short 3', tag: 'Shorts' },
+      { id: 'j9eCiA79a1U', title: 'Short 4', tag: 'Shorts' }
+    ];
+
+    function renderVideoGrid() {
+      const grid = document.getElementById('videoGrid');
+      if (!grid) return;
+      grid.innerHTML = youtubeVideos.map((video, i) => `
+        <div class="video-card reveal" style="transition-delay:${(i % 3) * 0.1}s" onclick="openVideoModal('${video.id}')">
+          <img class="video-thumb" src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg" alt="${video.title}" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${video.id}/hqdefault.jpg'">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 24 24"><polygon points="10,8 16,12 10,16"/></svg>
+          </div>
+          <div class="video-overlay">
+            <span class="video-tag">${video.tag}</span>
+            <div class="video-title">${video.title}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openVideoModal(videoId) {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      modal.classList.remove('active');
+      iframe.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeVideoModal();
+    });
+
+
+    /* ═══════════════════════════════════════════════════════════════
        TRANSLATIONS — EASY TO EDIT
        Change the text below to customize content in each language.
        ═══════════════════════════════════════════════════════════════ */
@@ -3841,6 +4069,7 @@
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('loader').classList.add('hidden');
+        renderVideoGrid();
       }, 1600);
     });
 
@@ -4104,6 +4333,21 @@
       }
     });
   </script>
+
+  <!-- ═══════════════════════════════ VIDEO MODAL ══════════════════════════════════ -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-modal-backdrop" onclick="closeVideoModal()"></div>
+    <div class="video-modal-content">
+      <button class="video-modal-close" onclick="closeVideoModal()" aria-label="Close video">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <iframe id="videoIframe" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+
 </body>
 
 </html>
